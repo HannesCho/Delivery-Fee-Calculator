@@ -18,6 +18,8 @@ export const additionalItemRate = 0.5;
 export const extraBulkStandard: number = 12;
 // set up the rate of extra bulk.
 export const extraBulkRate: number = 1.2;
+// set up the rate of friday rush.
+export const fridayRushRate: number = 1.2;
 
 //add API_URL Here, if you need backend data from api
 export const API_URL: string = "";
