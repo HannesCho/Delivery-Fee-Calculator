@@ -7,3 +7,5 @@ it("Home should be rendered", () => {
   const calEl = screen.getByText(/title/i);
   expect(calEl).toBeInTheDocument();
 });
+
+// test the input and label here.

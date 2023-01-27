@@ -1,9 +1,9 @@
-import { LabelProps } from "../types/label.type";
+import { LabelProps } from "../types/LabelProps.type";
 
-const InputLabel = ({ title }: LabelProps) => {
+const InputLabel = ({ name }: LabelProps) => {
   return (
-    <label className="text-base font-medium text-[#07074D]" htmlFor={title}>
-      {title}
+    <label className="text-base font-medium text-[#07074D]" htmlFor={name}>
+      {name}
     </label>
   );
 };

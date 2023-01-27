@@ -7,20 +7,23 @@ import extraBulkFee from "./extraBulkFee";
 import fridayRush from "./fridayRush";
 
 const feeCalculator = (
-  cartValue: number,
-  deliveryDistance: number,
-  amountOfItem: number,
+  cartValue: string,
+  deliveryDistance: string,
+  amountOfItem: string,
   now: Date
 ) => {
   let result = 0;
 
   // calculate the delivery fee
-  const basicSurchargeValue = basicSurcharge(cartValue).value;
-  const additionalDistanceFeeValue =
-    additionalDistanceFee(deliveryDistance).value;
-  const basicDistanceFeeValue = basicDistanceFee(deliveryDistance).value;
-  const additionalItemsValue = additionalItems(amountOfItem).value;
-  const extraBulkFeeValue = extraBulkFee(amountOfItem).value;
+  const basicSurchargeValue = basicSurcharge(Number(cartValue)).value;
+  const additionalDistanceFeeValue = additionalDistanceFee(
+    Number(deliveryDistance)
+  ).value;
+  const basicDistanceFeeValue = basicDistanceFee(
+    Number(deliveryDistance)
+  ).value;
+  const additionalItemsValue = additionalItems(Number(amountOfItem)).value;
+  const extraBulkFeeValue = extraBulkFee(Number(amountOfItem)).value;
   result =
     basicSurchargeValue +
     additionalDistanceFeeValue +
@@ -33,7 +36,7 @@ const feeCalculator = (
   result = Math.round(result * fridayRushValue * 100) / 100; //round at 2 decimal
 
   // if Cart Value over 100 euro, fee will be 0 euro.
-  if (cartValue >= 100) {
+  if (Number(cartValue) >= 100) {
     result = 0;
   }
 
