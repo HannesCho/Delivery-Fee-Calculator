@@ -1,12 +1,13 @@
 import { fridayRushRate } from "../config/config";
-import { FeeDTO } from "../types/FeeDTO";
+import { DateDTO, FeeDTO } from "../types/FeeDTO";
 
 // decide applying of friday rush rate.
-const fridayRush = (now: Date): FeeDTO => {
+const fridayRush = ({ dateAndTime }: DateDTO): FeeDTO => {
+  const dateAndTimeUTC = new Date(dateAndTime);
   if (
-    now.getUTCDay() === 5 &&
-    now.getUTCHours() >= 15 &&
-    now.getUTCHours() <= 19
+    dateAndTimeUTC.getUTCDay() === 5 &&
+    dateAndTimeUTC.getUTCHours() >= 15 &&
+    dateAndTimeUTC.getUTCHours() <= 19
   ) {
     // return basic surchage
     return { value: fridayRushRate };

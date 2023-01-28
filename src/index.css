@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Russo+One&family=Teko:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Teko:wght@600&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,12 +11,73 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.checkedout-font {
-  font-family: "Russo One", sans-serif;
-  font-size: 60px;
+/* remove blue background form input fields */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 9999s ease-in-out 0s;
 }
 
-.home-font {
+.custom-font {
   font-family: "Fredoka One", cursive;
-  font-size: 40px;
+}
+
+.custom-font-cal {
+  font-family: "Teko", sans-serif;
+}
+
+@media screen and (min-width: 768px) {
+  .custom-h-cal {
+    height: calc(100vh - 3.5rem);
+  }
+}
+
+.custom-h-cal {
+  min-height: 650px;
+  min-width: 375px;
+}
+
+.custom-h {
+  height: calc(100vh - 3.5rem);
+}
+
+/* reuse the sytle from tailwind CSS. */
+@layer components {
+  .partial-fee-text {
+    @apply text-sm lg:text-base text-gray-400 text-start ml-2 lg:ml-8;
+  }
+  .partial-fee-value {
+    @apply text-sm lg:text-base text-gray-400 text-end ml-2 lg:ml-8;
+  }
+  .lg-text {
+    @apply text-white text-2xl sm:text-5xl;
+  }
+  .round-bg {
+    @apply mx-auto w-[300px] h-[300px] sm:w-[550px] sm:h-[550px] rounded-full bg-black flex flex-col justify-center items-center;
+  }
+  .yellow-btn {
+    @apply w-full bg-yellow-400 hover:bg-yellow-300 mt-4 mb-2 text-black p-3 rounded-lg font-semibold text-sm sm:text-lg;
+  }
+  .nav-icon {
+    @apply text-yellow-400 w-4 h-4 sm:w-6 h-6 mr-2;
+  }
+  .nav-text {
+    @apply text-black font-bold text-sm sm:text-lg mr-2;
+  }
+  .footer-text {
+    @apply text-gray-500 text-sm sm:text-lg mr-4;
+  }
+  .input-field {
+    @apply w-[160px] m-2 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-yellow-400 focus:shadow-md;
+  }
+  .rows {
+    @apply flex items-center justify-start ml-2 sm:ml-14;
+  }
+  .btns {
+    @apply w-[20px] flex flex-col font-black text-xl ml-2;
+  }
+  .rows-partial {
+    @apply flex justify-between items-center h-[66px];
+  }
 }

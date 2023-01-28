@@ -1,26 +1,33 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NumberInput from "../components/NumberInput";
-import feeCalculator from "../utils/feeCalculator";
 import InputLabel from "../components/InputLabel";
 import IncrementBtn from "../components/IncrementBtn";
 import DecrementBtn from "../components/DecrementBtn";
-import handleChange from "../utils/handleChange";
-import handleBlur from "../utils/handleBlur";
-import { Link, useNavigate } from "react-router-dom";
-import { FeeDTO } from "../types/FeeDTO";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DateInput from "../components/DateInput";
 import TimeInput from "../components/TimeInput";
+import ShowErrorText from "../components/ShowErrorText";
+import { FeeDTO } from "../types/FeeDTO";
+import feeCalculator from "../utils/feeCalculator";
+import handleChange from "../utils/handleChange";
+import handleBlur from "../utils/handleBlur";
 import timeToString from "../utils/timeToString";
 import dateToString from "../utils/dateToString";
 import dateHandleChange from "../utils/dateHandleChange";
 import timeHandleChange from "../utils/timeHandleChange";
+import basicSurcharge from "../utils/basicSurcharge";
+import basicDistanceFee from "../utils/basicDistanceFee";
+import additionalDistanceFee from "../utils/additionalDistanceFee";
+import extraBulkFee from "../utils/extraBulkFee";
+import fridayRush from "../utils/fridayRush";
+import additionalItems from "../utils/additionalItems";
+import { fridayRushRate } from "../config/config";
 
 const Calculator = () => {
   const [cartValue, setCartValue] = useState("");
   const [deliveryDistance, setDeliveryDistance] = useState("");
   const [amountOfItem, setAmountOfItem] = useState("");
-  const [now, setNow] = useState(new Date());
   const [dateString, setDateString] = useState(dateToString(new Date()));
   const [timeString, setTimeString] = useState(timeToString(new Date()));
   const [totalFee, setTotalFee] = useState(0);
@@ -34,21 +41,28 @@ const Calculator = () => {
   const [showErrorText3, setShowErrorText3] = useState(false);
   const ref = useRef<HTMLInputElement>(null);
 
-  // update the time and date.
-  useEffect(() => {
-    setInterval(() => setNow(new Date()), 60000);
-    setInterval(() => setDateString(dateToString(new Date())), 360000);
-    setInterval(() => setTimeString(timeToString(new Date())), 60000);
-  }, []);
+  // variable for the user seleceted date and time
+  const dateAndTime = dateString + " " + timeString + " UTC";
 
   // realtime calculator.
   useEffect(() => {
-    setTotalFee(feeCalculator(cartValue, deliveryDistance, amountOfItem, now));
-  }, [cartValue, deliveryDistance, amountOfItem, now]);
+    setTotalFee(
+      feeCalculator({ cartValue, deliveryDistance, amountOfItem, dateAndTime })
+        .value
+    );
+  }, [
+    cartValue,
+    deliveryDistance,
+    amountOfItem,
+    dateString,
+    timeString,
+    dateAndTime,
+  ]);
 
   // handle click the check out button.
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    console.log("here:", totalFee);
     const feeDTO: FeeDTO = {
       value: totalFee,
     };
@@ -60,143 +74,200 @@ const Calculator = () => {
   };
 
   return (
-    <div className="items-center justify-center p-12 pb-16">
-      <div className="grid grid-cols-2 lg:grid-cols-3 ">
-        <div className="grid mx-auto w-full w-[600px] sm:w-[700px] grid-cols-3 grid-rows-7 justify-items-start items-center col-span-2">
-          <div className="flex items-center col-span-3">
+    <div className="custom-h-cal h-full flex items-center justify-center pb-14">
+      <div className="custom-font w-full grid grid-cols-1 grid-rows-2 md:grid-cols-3 md:grid-rows-1 h-full border-8 border-black rounded-3xl z-20">
+        <div className="p-6 mx-auto w-full col-span-2">
+          <div className="h-16 mb-4 flex items-center col-span-3 grid-no-1">
             <FontAwesomeIcon
               icon={["fas", "calculator"]}
               className="text-yellow-400 h-10 mr-4"
             />
-            <div className="home-font text-4xl">Delivery Fee Calculator</div>
+            <div className="custom-font text-2xl lg:text-5xl md:text-4xl sm:text-3xl">
+              Delivery Fee Calculator
+            </div>
           </div>
-          <InputLabel name="Cart Value" />
-          <NumberInput
-            name="Cart Value"
-            value={cartValue}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              handleChange({
-                event: e,
-                setState: setCartValue,
-                error: error1,
-                setError: setError1,
-              });
-            }}
-            min={0}
-            error={error1}
-            showErrorText={showErrorText1}
-            innerRef={ref}
-            onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
-              handleBlur({
-                event: e,
-                ref,
-                error: error1,
-                setError: setError1,
-                setShowErrorText: setShowErrorText1,
-              })
-            }
-          />
-          <div>
-            <IncrementBtn value={cartValue} setState={setCartValue} />
-            <DecrementBtn value={cartValue} setState={setCartValue} />
+          <div className="rows">
+            <InputLabel name="Cart Value" />
+            <div className="flex flex-col">
+              <NumberInput
+                name="Cart Value"
+                value={cartValue}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  handleChange({
+                    event: e,
+                    setState: setCartValue,
+                    error: error1,
+                    setError: setError1,
+                  });
+                }}
+                min={0}
+                error={error1}
+                innerRef={ref}
+                onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
+                  handleBlur({
+                    event: e,
+                    error: error1,
+                    setError: setError1,
+                    setShowErrorText: setShowErrorText1,
+                  })
+                }
+              />
+              {ShowErrorText({ showErrorText: showErrorText1 })}
+            </div>
+            <div className="btns">
+              <IncrementBtn value={cartValue} setState={setCartValue} />
+              <DecrementBtn value={cartValue} setState={setCartValue} />
+            </div>
           </div>
-          <InputLabel name="Delivery Distance" />
-          <NumberInput
-            name="Delivery Distance"
-            value={deliveryDistance}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              handleChange({
-                event: e,
-                setState: setDeliveryDistance,
-                error: error2,
-                setError: setError2,
-              });
-            }}
-            min={0}
-            error={error2}
-            showErrorText={showErrorText2}
-            innerRef={ref}
-            onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
-              handleBlur({
-                event: e,
-                ref,
-                error: error2,
-                setError: setError2,
-                setShowErrorText: setShowErrorText2,
-              })
-            }
-          />
-          <IncrementBtn
-            value={deliveryDistance}
-            setState={setDeliveryDistance}
-          />
-          <DecrementBtn
-            value={deliveryDistance}
-            setState={setDeliveryDistance}
-          />
-          <div></div>
-          <InputLabel name="Amount of Item" />
-          <NumberInput
-            name="Amount of Item"
-            value={amountOfItem}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              handleChange({
-                event: e,
-                setState: setAmountOfItem,
-                error: error3,
-                setError: setError3,
-              });
-            }}
-            min={0}
-            error={error3}
-            showErrorText={showErrorText3}
-            innerRef={ref}
-            onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
-              handleBlur({
-                event: e,
-                ref,
-                error: error3,
-                setError: setError3,
-                setShowErrorText: setShowErrorText3,
-              })
-            }
-          />
-          <IncrementBtn value={amountOfItem} setState={setAmountOfItem} />
-          <DecrementBtn value={amountOfItem} setState={setAmountOfItem} />
-          <InputLabel name="Date" />
-          <DateInput
-            name="Date"
-            value={dateString}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              dateHandleChange({ event: e, setState: setDateString });
-            }}
-            min={dateToString(new Date())}
-          />
-          <TimeInput
-            name="Time"
-            value={timeString}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              timeHandleChange({ event: e, setState: setTimeString });
-            }}
-            min="10:00"
-            max="24:00"
-          />
-          <div>{totalFee}</div>
+          <div className="rows">
+            <InputLabel name="Delivery Distance" />
+            <div className="flex flex-col">
+              <NumberInput
+                name="Delivery Distance"
+                value={deliveryDistance}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  handleChange({
+                    event: e,
+                    setState: setDeliveryDistance,
+                    error: error2,
+                    setError: setError2,
+                  });
+                }}
+                min={0}
+                error={error2}
+                innerRef={ref}
+                onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
+                  handleBlur({
+                    event: e,
+                    error: error2,
+                    setError: setError2,
+                    setShowErrorText: setShowErrorText2,
+                  })
+                }
+              />
+              {ShowErrorText({ showErrorText: showErrorText2 })}
+            </div>
+            <div className="btns">
+              <IncrementBtn
+                value={deliveryDistance}
+                setState={setDeliveryDistance}
+              />
+              <DecrementBtn
+                value={deliveryDistance}
+                setState={setDeliveryDistance}
+              />
+            </div>
+          </div>
+          <div className="rows">
+            <InputLabel name="Amount of Item" />
+            <div className="flex flex-col">
+              <NumberInput
+                name="Amount of Item"
+                value={amountOfItem}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  handleChange({
+                    event: e,
+                    setState: setAmountOfItem,
+                    error: error3,
+                    setError: setError3,
+                  });
+                }}
+                min={0}
+                error={error3}
+                innerRef={ref}
+                onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
+                  handleBlur({
+                    event: e,
+                    error: error3,
+                    setError: setError3,
+                    setShowErrorText: setShowErrorText3,
+                  })
+                }
+              />
+              {ShowErrorText({ showErrorText: showErrorText3 })}
+            </div>
+            <div className="btns">
+              <IncrementBtn value={amountOfItem} setState={setAmountOfItem} />
+              <DecrementBtn value={amountOfItem} setState={setAmountOfItem} />
+            </div>
+          </div>
+          <div className="rows">
+            <InputLabel name="Date" />
+            <div className="flex flex-col">
+              <DateInput
+                name="Date"
+                value={dateString}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  dateHandleChange({ event: e, setState: setDateString });
+                }}
+                min={dateToString(new Date())}
+              />
+              <TimeInput
+                name="Time"
+                value={timeString}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  timeHandleChange({ event: e, setState: setTimeString });
+                }}
+                min="10:00"
+                max="24:00"
+              />
+            </div>
+          </div>
         </div>
-        <div className="grid grid-rows-6 grid-cols-3 h-full bg-gray-700">
-          <div className="col-span-3"></div>
-          <div className="col-span-3"></div>
-          <div className="col-span-3"></div>
-          <div className="col-span-3"></div>
-          <div className="col-span-3"></div>
+        <div className="p-6 h-full bg-gray-700 rounded-r-2xl z-0">
+          <div className="h-16 flex items-end text-white text-lg lg:text-2xl mb-4">
+            Fee Details
+          </div>
+          <div className="rows-partial">
+            <div className="partial-fee-text">Basic Surcharge</div>
+            <div className="partial-fee-value">
+              € {basicSurcharge(Number(cartValue)).value}
+            </div>
+          </div>
+          <div className="rows-partial">
+            <div className="partial-fee-text">
+              <p>Basic Distance Fee</p>
+              <p>Additional Distance Fee</p>
+            </div>
+            <div className="partial-fee-value">
+              <div>€ {basicDistanceFee(Number(deliveryDistance)).value}</div>
+              <div>
+                € {additionalDistanceFee(Number(deliveryDistance)).value}
+              </div>
+            </div>
+          </div>
+          <div className="rows-partial">
+            <div className="partial-fee-text">
+              <p>Additional Items</p>
+              <p>Extra Bulk Fee</p>
+            </div>
+            <div className="partial-fee-value">
+              <div>€ {additionalItems(Number(amountOfItem)).value}</div>
+              <div> € {extraBulkFee(Number(amountOfItem)).value}</div>
+            </div>
+          </div>
+          <div className="rows-partial">
+            <div className="partial-fee-text">Friday Rush</div>
+            <div className="partial-fee-value">
+              €{" "}
+              {fridayRush({ dateAndTime }).value === 1
+                ? "Not applied"
+                : `*${fridayRushRate} Applied`}
+            </div>
+          </div>
+          <div className="h-6 m-4 border-b"></div>
+          <div className="rows-partial">
+            <div className="col-span-2 text-4xl text-white text-center">
+              Total
+            </div>
+            <div className="text-3xl text-white text-end mr-4">
+              € {totalFee}
+            </div>
+          </div>
+
           <div className="col-span-3 flex justify-end items-end">
-            <form
-              onSubmit={handleSubmit}
-              className="shadow-lg h-auto w-60 flex rounded-lg mr-4 mb-2"
-            >
-              <button className="w-full bg-yellow-400 hover:bg-yellow-300 mt-4 mb-2 text-black p-3 rounded-lg font-semibold text-lg">
-                <Link to="/checkedout">Check Out →</Link>
-              </button>
+            <form onSubmit={handleSubmit}>
+              <button className="yellow-btn">Check Out →</button>
             </form>
           </div>
         </div>

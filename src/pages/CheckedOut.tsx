@@ -3,15 +3,14 @@ import { Link, useLocation } from "react-router-dom";
 const CheckedOut = () => {
   const location = useLocation();
   return (
-    <div className="flex items-center justify-center p-12 pb-14">
-      <div className="mx-auto w-full max-w-[550px]">
-        <h1 className="checkedout-font">
-          You Checked Out {location.state ? location.state.value : 0}
-        </h1>
+    <div className="custom-h flex items-center justify-center p-4 pb-14">
+      <div className="round-bg">
+        <p className="custom-font lg-text mb-4">You Checked Out :</p>
+        <p className="custom-font lg-text mb-8">
+          € {location.state ? location.state.value : 0}
+        </p>
         <Link to="/calculator">
-          <button className="text-xs md:text-base bg-green-400 text-white  p-2 rounded  hover:bg-green-300 hover:text-gray-100">
-            To Calculator
-          </button>
+          <button className="custom-font yellow-btn">To Calculator</button>
         </Link>
       </div>
     </div>

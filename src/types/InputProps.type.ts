@@ -7,7 +7,6 @@ export interface InputProps {
   max?: number;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   error: boolean;
-  showErrorText: boolean;
   innerRef: React.RefObject<HTMLInputElement>;
   onBlur: React.FocusEventHandler<HTMLElement>;
 }

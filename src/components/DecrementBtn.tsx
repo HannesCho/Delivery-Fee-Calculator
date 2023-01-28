@@ -1,12 +1,19 @@
 import { BtnProps } from "../types/BtnProps";
 
-const DecrementBtn = ({ value, setState, max }: BtnProps) => {
+const DecrementBtn = ({ value, setState }: BtnProps) => {
   const decrement = () => {
+    const numValue = Number(value);
+
     // if value is 0 no more decrease
-    if (value === "0") {
+    if (numValue === 0) {
       setState("0");
     } else {
-      setState((Number(value) - 1).toString());
+      // handle NaN
+      if (numValue) {
+        setState((numValue - 1).toString());
+      } else {
+        setState("0");
+      }
     }
   };
   return (

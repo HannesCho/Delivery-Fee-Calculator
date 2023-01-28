@@ -1,7 +1,7 @@
 import { BtnProps } from "../types/BtnProps";
 
 const IncrementBtn = ({ value, setState, max }: BtnProps) => {
-  const increaseQty = () => {
+  const increment = () => {
     const numValue = Number(value);
     const numMax = Number(max);
 
@@ -9,15 +9,24 @@ const IncrementBtn = ({ value, setState, max }: BtnProps) => {
     if (max) {
       if (numValue >= numMax) {
         setState(max);
+      }
+    } else {
+      // handle initial value.
+      if (value === "") {
+        setState("0");
       } else {
-        setState((numValue + 1).toString());
+        // handle NaN.
+        if (numValue || numValue === 0) {
+          setState((numValue + 1).toString());
+        } else {
+          setState("0");
+        }
       }
     }
-    setState((numValue + 1).toString());
   };
   return (
     <div className="w-6 h-6">
-      <button onClick={increaseQty}>+</button>
+      <button onClick={increment}>+</button>
     </div>
   );
 };

@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="flex items-center justify-center p-12 pb-14">
-      <div className="mx-auto w-full max-w-[550px]">
-        <h1 className="home-font">Welcome Home</h1>
-        <Link to="/calculator">
-          <button className="text-xs md:text-base bg-green-400 text-white  p-2 rounded  hover:bg-green-300 hover:text-gray-100">
-            To Calculator
-          </button>
-        </Link>
+    <div className="custom-h">
+      <div className="flex h-full items-center justify-center p-4 pb-14">
+        <div className="round-bg">
+          <h1 className="custom-font lg-text mb-4">Let's Calculate!</h1>
+          <Link to="/calculator">
+            <button className="custom-font yellow-btn">To Calculator</button>
+          </Link>
+        </div>
       </div>
     </div>
   );
