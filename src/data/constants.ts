@@ -1,4 +1,4 @@
-// config initial rate of the delivery fee.
+// set up the initial data of the delivery fee.
 
 // set up the standard of basic surchage.
 export const basicSurchargeStandard: number = 10;
@@ -20,6 +20,3 @@ export const extraBulkStandard: number = 12;
 export const extraBulkRate: number = 1.2;
 // set up the rate of friday rush.
 export const fridayRushRate: number = 1.2;
-
-//add API_URL Here, if you need backend data from api
-export const API_URL: string = "";

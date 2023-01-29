@@ -1,8 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Teko:wght@600&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* apply local font, do not need to connect to internet to use the font */
+@font-face {
+  font-family: "Fredoka One";
+  src: local("Fredoka One"),
+    url(./font/FredokaOne/FredokaOne-Regular.ttf) format("truetype");
+}
 
 /* remove the arrow inside number input fields. */
 input::-webkit-outer-spin-button,
@@ -19,25 +24,26 @@ input:-webkit-autofill:active {
   transition: background-color 9999s ease-in-out 0s;
 }
 
+/* apply downloaded font */
 .custom-font {
   font-family: "Fredoka One", cursive;
 }
 
-.custom-font-cal {
-  font-family: "Teko", sans-serif;
-}
-
+/* apply the calculated height to fix the nav and footer */
+/* media query for responsive design of the calculator screen  */
 @media screen and (min-width: 768px) {
   .custom-h-cal {
     height: calc(100vh - 3.5rem);
   }
 }
 
+/* set min height and width for responsive design of the calculator screen */
 .custom-h-cal {
   min-height: 650px;
   min-width: 375px;
 }
 
+/* apply the calculated height to fix the nav and footer */
 .custom-h {
   height: calc(100vh - 3.5rem);
 }

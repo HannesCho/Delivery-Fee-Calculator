@@ -2,8 +2,8 @@ import {
   additionalDistanceRate,
   additionalDistanceStandard,
   basicDistanceFeeStandard,
-} from "../config/config";
-import { FeeDTO } from "../types/FeeDTO";
+} from "../../data/constants";
+import { FeeDTO } from "../../types/FeeDTO";
 
 // calculate additional distace fee every 500m, if the distance is over 1000m(1km)
 const additionalDistanceFee = (deliveryDistance: number): FeeDTO => {

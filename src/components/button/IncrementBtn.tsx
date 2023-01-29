@@ -1,4 +1,4 @@
-import { BtnProps } from "../types/BtnProps";
+import { BtnProps } from "../../types/BtnProps";
 
 const IncrementBtn = ({ value, setState, max }: BtnProps) => {
   const increment = () => {

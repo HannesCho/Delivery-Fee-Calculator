@@ -1,5 +1,5 @@
-import { basicDistanceRate } from "../config/config";
-import { FeeDTO } from "../types/FeeDTO";
+import { basicDistanceRate } from "../../data/constants";
+import { FeeDTO } from "../../types/FeeDTO";
 
 // calculate basic distance fee, if the distance is under 1000m(1km)
 const basicDistanceFee = (deliveryDistance: number): FeeDTO => {

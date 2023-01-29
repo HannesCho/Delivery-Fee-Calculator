@@ -1,5 +1,5 @@
 // calculate total delivery fee
-import { FeeDTO, TotalFeeDTO } from "../types/FeeDTO";
+import { FeeDTO, TotalFeeDTO } from "../../types/FeeDTO";
 import additionalDistanceFee from "./additionalDistanceFee";
 import additionalItems from "./additionalItems";
 import basicDistanceFee from "./basicDistanceFee";

@@ -1,4 +1,4 @@
-import { HandleChangeProps } from "../types/HandleChangeProps.type";
+import { HandleChangeProps } from "../../types/HandleChangeProps.type";
 
 // handle the change of input values.
 const handleChange = ({
@@ -7,7 +7,6 @@ const handleChange = ({
   error,
   setError,
 }: HandleChangeProps) => {
-  event.preventDefault();
   let { value, min, max } = event.target;
   // validation of input
   const newValueIsValid = !event.target.validity.patternMismatch;

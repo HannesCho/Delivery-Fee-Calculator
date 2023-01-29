@@ -1,5 +1,8 @@
-import { additionalItemRate, additionalItemStandard } from "../config/config";
-import { FeeDTO } from "../types/FeeDTO";
+import {
+  additionalItemRate,
+  additionalItemStandard,
+} from "../../data/constants";
+import { FeeDTO } from "../../types/FeeDTO";
 
 // calculate additional surcharge for more items
 const additionalItems = (amountOfItem: number): FeeDTO => {

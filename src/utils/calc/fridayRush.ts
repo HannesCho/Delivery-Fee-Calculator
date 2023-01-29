@@ -1,5 +1,5 @@
-import { fridayRushRate } from "../config/config";
-import { DateDTO, FeeDTO } from "../types/FeeDTO";
+import { fridayRushRate } from "../../data/constants";
+import { DateDTO, FeeDTO } from "../../types/FeeDTO";
 
 // decide applying of friday rush rate.
 const fridayRush = ({ dateAndTime }: DateDTO): FeeDTO => {

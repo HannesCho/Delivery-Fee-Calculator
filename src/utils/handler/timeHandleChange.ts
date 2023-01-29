@@ -1,5 +1,5 @@
-import { TimeHandleChangeProps } from "../types/HandleChangeProps.type";
-import timeToString from "./timeToString";
+import { TimeHandleChangeProps } from "../../types/HandleChangeProps.type";
+import timeToString from "../converter/timeToString";
 
 // handle the change of input values.
 const timeHandleChange = ({ event, setState }: TimeHandleChangeProps) => {

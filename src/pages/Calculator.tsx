@@ -1,28 +1,28 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import NumberInput from "../components/NumberInput";
-import InputLabel from "../components/InputLabel";
-import IncrementBtn from "../components/IncrementBtn";
-import DecrementBtn from "../components/DecrementBtn";
-import DateInput from "../components/DateInput";
-import TimeInput from "../components/TimeInput";
-import ShowErrorText from "../components/ShowErrorText";
+import NumberInput from "../components/input/NumberInput";
+import InputLabel from "../components/input/InputLabel";
+import DateInput from "../components/input/DateInput";
+import TimeInput from "../components/input/TimeInput";
+import IncrementBtn from "../components/button/IncrementBtn";
+import DecrementBtn from "../components/button/DecrementBtn";
+import ShowErrorText from "../components/error/ShowErrorText";
 import { FeeDTO } from "../types/FeeDTO";
-import feeCalculator from "../utils/feeCalculator";
-import handleChange from "../utils/handleChange";
-import handleBlur from "../utils/handleBlur";
-import timeToString from "../utils/timeToString";
-import dateToString from "../utils/dateToString";
-import dateHandleChange from "../utils/dateHandleChange";
-import timeHandleChange from "../utils/timeHandleChange";
-import basicSurcharge from "../utils/basicSurcharge";
-import basicDistanceFee from "../utils/basicDistanceFee";
-import additionalDistanceFee from "../utils/additionalDistanceFee";
-import extraBulkFee from "../utils/extraBulkFee";
-import fridayRush from "../utils/fridayRush";
-import additionalItems from "../utils/additionalItems";
-import { fridayRushRate } from "../config/config";
+import basicSurcharge from "../utils/calc/basicSurcharge";
+import basicDistanceFee from "../utils/calc/basicDistanceFee";
+import additionalDistanceFee from "../utils/calc/additionalDistanceFee";
+import additionalItems from "../utils/calc/additionalItems";
+import extraBulkFee from "../utils/calc/extraBulkFee";
+import fridayRush from "../utils/calc/fridayRush";
+import feeCalculator from "../utils/calc/feeCalculator";
+import handleChange from "../utils/handler/handleChange";
+import dateHandleChange from "../utils/handler/dateHandleChange";
+import timeHandleChange from "../utils/handler/timeHandleChange";
+import handleBlur from "../utils/handler/handleBlur";
+import timeToString from "../utils/converter/timeToString";
+import dateToString from "../utils/converter/dateToString";
+import { fridayRushRate } from "../data/constants";
 
 const Calculator = () => {
   const [cartValue, setCartValue] = useState("");
@@ -62,7 +62,6 @@ const Calculator = () => {
   // handle click the check out button.
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    console.log("here:", totalFee);
     const feeDTO: FeeDTO = {
       value: totalFee,
     };
@@ -82,7 +81,7 @@ const Calculator = () => {
               icon={["fas", "calculator"]}
               className="text-yellow-400 h-10 mr-4"
             />
-            <div className="custom-font text-2xl lg:text-5xl md:text-4xl sm:text-3xl">
+            <div className="text-2xl lg:text-5xl md:text-4xl sm:text-3xl">
               Delivery Fee Calculator
             </div>
           </div>
@@ -220,7 +219,7 @@ const Calculator = () => {
           </div>
           <div className="rows-partial">
             <div className="partial-fee-text">Basic Surcharge</div>
-            <div className="partial-fee-value">
+            <div className="partial-fee-value" data-testid="basicSurcharge">
               € {basicSurcharge(Number(cartValue)).value}
             </div>
           </div>
@@ -230,8 +229,10 @@ const Calculator = () => {
               <p>Additional Distance Fee</p>
             </div>
             <div className="partial-fee-value">
-              <div>€ {basicDistanceFee(Number(deliveryDistance)).value}</div>
-              <div>
+              <div data-testid="basicDistanceFee">
+                € {basicDistanceFee(Number(deliveryDistance)).value}
+              </div>
+              <div data-testid="additionalDistanceFee">
                 € {additionalDistanceFee(Number(deliveryDistance)).value}
               </div>
             </div>
@@ -242,17 +243,20 @@ const Calculator = () => {
               <p>Extra Bulk Fee</p>
             </div>
             <div className="partial-fee-value">
-              <div>€ {additionalItems(Number(amountOfItem)).value}</div>
-              <div> € {extraBulkFee(Number(amountOfItem)).value}</div>
+              <div data-testid="additionalItems">
+                € {additionalItems(Number(amountOfItem)).value}
+              </div>
+              <div data-testid="extraBulkFee">
+                € {extraBulkFee(Number(amountOfItem)).value}
+              </div>
             </div>
           </div>
           <div className="rows-partial">
             <div className="partial-fee-text">Friday Rush</div>
-            <div className="partial-fee-value">
-              €{" "}
+            <div className="partial-fee-value" data-testid="fridayRushRate">
               {fridayRush({ dateAndTime }).value === 1
-                ? "Not applied"
-                : `*${fridayRushRate} Applied`}
+                ? "€ Not applied"
+                : `€ *${fridayRushRate} Applied`}
             </div>
           </div>
           <div className="h-6 m-4 border-b"></div>
@@ -260,7 +264,10 @@ const Calculator = () => {
             <div className="col-span-2 text-4xl text-white text-center">
               Total
             </div>
-            <div className="text-3xl text-white text-end mr-4">
+            <div
+              className="text-3xl text-white text-end mr-4"
+              data-testid="totalFee"
+            >
               € {totalFee}
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { FeeDTO } from "../types/FeeDTO";
+import { FeeDTO } from "../../types/FeeDTO";
 
 // calculate basic surcharge if Cart Value is under 10 euro.
 const basicSurcharge = (cartValue: number): FeeDTO => {

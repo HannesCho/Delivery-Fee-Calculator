@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CheckedOut from "./CheckedOut";
 
-it("Checkedout page should be rendered", () => {
+it("Checkedout page should be rendered.", () => {
   render(
     <BrowserRouter>
       <Routes>
@@ -12,4 +12,16 @@ it("Checkedout page should be rendered", () => {
   );
   const checkEl = screen.getByText(/check/i);
   expect(checkEl).toBeInTheDocument();
+});
+
+test("The link should be generated for calculator page.", () => {
+  render(
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<CheckedOut />} />
+      </Routes>
+    </BrowserRouter>
+  );
+  const linkEls = screen.getByRole("link");
+  expect(linkEls).toHaveAttribute("href", "/calculator");
 });

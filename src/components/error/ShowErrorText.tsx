@@ -1,4 +1,4 @@
-import { ErrorTextProps } from "../types/ErrorTextProps";
+import { ErrorTextProps } from "../../types/ErrorTextProps";
 
 const ShowErrorText = ({ showErrorText }: ErrorTextProps) => {
   return (

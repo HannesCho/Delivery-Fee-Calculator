@@ -1,4 +1,4 @@
-import { DateInputProps } from "../types/InputProps.type";
+import { DateInputProps } from "../../types/InputProps.type";
 
 const TimeInput = ({ name, value, onChange, min, max }: DateInputProps) => {
   return (

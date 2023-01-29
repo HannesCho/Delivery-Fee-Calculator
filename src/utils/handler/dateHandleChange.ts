@@ -1,5 +1,5 @@
-import { DateHandleChangeProps } from "../types/HandleChangeProps.type";
-import dateToString from "./dateToString";
+import { DateHandleChangeProps } from "../../types/HandleChangeProps.type";
+import dateToString from "../converter/dateToString";
 
 // handle the change of input values.
 const dateHandleChange = ({ event, setState }: DateHandleChangeProps) => {

@@ -1,4 +1,4 @@
-import { HandleBlurProps } from "../types/HandleBlurProps.type";
+import { HandleBlurProps } from "../../types/HandleBlurProps.type";
 
 // handle Blur event -> input validation and error message.
 const handleBlur = ({

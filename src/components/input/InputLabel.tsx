@@ -1,4 +1,4 @@
-import { LabelProps } from "../types/LabelProps.type";
+import { LabelProps } from "../../types/LabelProps.type";
 
 const InputLabel = ({ name }: LabelProps) => {
   return (
