@@ -2,6 +2,22 @@
 
 This project was created with [Create React App](https://github.com/facebook/create-react-app).
 
+<hr/>
+
+## Prerequisits
+
+These are already installed in your computer
+
+node version 16.x
+
+In the project directory, you should run <code>npm i</code> to install all the dependencies :
+
+```
+$ npm i
+```
+
+<hr/>
+
 ## Following Scripts also work for my project.
 
 In the project directory, you can run:
