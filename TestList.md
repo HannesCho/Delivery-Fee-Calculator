@@ -8,11 +8,11 @@ Here You can find the list of the tests for thie project.
 
 > > #### DecrementBtn.test.tsx
 
-> > | Test Name | Result |
-> > | | :: |
-> > | DecrementBtn should be rendered. | <span style="color:green">Passed<span> |
-> > | If the value is 0, called setState to 0. | <span style="color:green">Passed<span> |
-> > | If the value is 10, called setState to 9. | <span style="color:green">Passed<span> |
+> > | Test Name                                  |                 Result                 |
+> > | ------------------------------------------ | :------------------------------------: |
+> > | DecrementBtn should be rendered.           | <span style="color:green">Passed<span> |
+> > | If the value is 0, called setState to 0.   | <span style="color:green">Passed<span> |
+> > | If the value is 10, called setState to 9.  | <span style="color:green">Passed<span> |
 > > | If the value is NaN, called setState to 0. | <span style="color:green">Passed<span> |
 
 > > #### IncrementBtn.test.tsx
