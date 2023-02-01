@@ -25,3 +25,6 @@ test("The link should be generated for calculator page.", () => {
   const linkEls = screen.getByRole("link");
   expect(linkEls).toHaveAttribute("href", "/calculator");
 });
+
+// limit!! test location.value should pass to this page. => End to End test.
+// e2e.test.tsx

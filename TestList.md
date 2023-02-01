@@ -5,6 +5,14 @@ Here You can find the list of the tests for thie project.
 
 ## Unit Test
 
+- 107 tests in total.
+- Covers <br>
+  90.15% Statements<br>
+  94.33% Branches<br>
+  90.69% Functions<br>
+  90.15% Lines<br>
+- Additional [e2e Test](#end-to-end-test) for uncovered Lines.
+
 ### Components/button/
 
 <br>
@@ -346,7 +354,9 @@ Here You can find the list of the tests for thie project.
 
 ## End to End Test
 
-<br>
+- 2 tests in total.
+- Ues puppeteer for test.
+  <br>
 
 ### /e2e.test.tsx
 

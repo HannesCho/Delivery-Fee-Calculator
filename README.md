@@ -6,9 +6,9 @@ This project was created with [Create React App](https://github.com/facebook/cre
 
 ## Prerequisits
 
-These are already installed in your computer
+This is already installed in your computer
 
-node version 16.x
+- node version 16.x
 
 In the project directory, you should run <code>npm i</code> to install all the dependencies :
 
@@ -35,8 +35,19 @@ You will also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-To see the test report, please add surfix `-- --coverage`.
-It will auto generate the coverage folder and you can see the test report if you open `coverage/lcov-report/index.html` file.
+To see the test report, please add surfix `-- --coverage --watchAll`.
+
+```
+npm test -- -- coverage --watchAll
+```
+
+It show the result in terminal.
+And it will auto generate the coverage folder and you can see the test report if you open `coverage/lcov-report/index.html` file.
+
+Here is the screenshot of the test report of this project.
+<img width="1440" alt="test report" src="https://user-images.githubusercontent.com/63042736/216102478-5dd43dbc-f5f1-4851-b852-4cf602ad89f4.png">
+
+For the list of the Test you can see [TestList.md](./TestList.md).
 
 ### `npm run build`
 
