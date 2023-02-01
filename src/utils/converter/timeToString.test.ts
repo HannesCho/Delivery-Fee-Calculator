@@ -5,9 +5,12 @@ test("timeToString shold be defined.", () => {
   expect(timeToString(mockTime)).toBeDefined();
 });
 
-test("0 shold be added to hour and minute, if their value is less than 9.", () => {
+test("0 shold be added to hour, if their value is less than 9.", () => {
   const mockTimeHour = new Date("Sunday, 26 March 2023, 02:10:00 UTC");
   expect(timeToString(mockTimeHour)).toEqual("02:10");
+});
+
+test("0 shold be added to minute, if their value is less than 9.", () => {
   const mockTimeMin = new Date("Sunday, 26 March 2023, 10:01:00 UTC");
   expect(timeToString(mockTimeMin)).toEqual("10:01");
 });

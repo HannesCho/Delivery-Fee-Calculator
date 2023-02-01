@@ -285,7 +285,8 @@ Here You can find the list of the tests for thie project.
 > > | Test Name                                                              |                 Result                 |
 > > | ---------------------------------------------------------------------- | :------------------------------------: |
 > > | dateToString should be defined.                                        | <span style="color:green">Passed<span> |
-> > | 0 shold be added to month and date, if their value is less than 9.     | <span style="color:green">Passed<span> |
+> > | 0 shold be added to month, if their value is less than 9.              | <span style="color:green">Passed<span> |
+> > | 0 shold be added to date, if their value is less than 9.               | <span style="color:green">Passed<span> |
 > > | 0 shold not be added to month and date, if their value is more than 9. | <span style="color:green">Passed<span> |
 > > | dateToString shold return date as yyyy-mm-dd.                          | <span style="color:green">Passed<span> |
 
@@ -296,7 +297,8 @@ Here You can find the list of the tests for thie project.
 > > | Test Name                                                               |                 Result                 |
 > > | ----------------------------------------------------------------------- | :------------------------------------: |
 > > | timeToString should be defined.                                         | <span style="color:green">Passed<span> |
-> > | 0 shold be added to hour and minute, if their value is less than 9.     | <span style="color:green">Passed<span> |
+> > | 0 shold be added to hour, if their value is less than 9.                | <span style="color:green">Passed<span> |
+> > | 0 shold be added to minute, if their value is less than 9.              | <span style="color:green">Passed<span> |
 > > | 0 shold not be added to hour and minute, if their value is more than 9. | <span style="color:green">Passed<span> |
 > > | timeToString shold return UTC time as hh:mm.                            | <span style="color:green">Passed<span> |
 
@@ -344,5 +346,16 @@ Here You can find the list of the tests for thie project.
 > > | handleChange shold be able to call setState with max when value bigger than range.          | <span style="color:green">Passed<span> |
 > > | handleChange shold be able to call setState with min when value smaller than range.         | <span style="color:green">Passed<span> |
 > > | handleChange shold be able to call serError once when error is true and pattern is matched. | <span style="color:green">Passed<span> |
+
+---
+
+## End to End Test
+
+> ### /e2e.test.tsx
+
+> > | Test Name                                    |                 Result                 |
+> > | -------------------------------------------- | :------------------------------------: |
+> > | Link to Check out should be worked.          | <span style="color:green">Passed<span> |
+> > | Total Fee shold be passed to Check out page. | <span style="color:green">Passed<span> |
 
 ---

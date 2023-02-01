@@ -62,8 +62,7 @@ const Calculator = () => {
   ]);
 
   // handle click the check out button.
-  const handleSubmit = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     const feeDTO: FeeDTO = {
       value: totalFee,
     };
