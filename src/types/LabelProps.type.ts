@@ -1,3 +1,3 @@
-export type LabelProps = {
+export interface LabelProps {
   name: string;
-};
+}
