@@ -16,7 +16,7 @@ const handleChange = ({
     }
   }
   // prevent number input goes below min or over max.
-  switch (true) {
+  switch (value) {
     case min && value < min:
       setState(min);
       break;
