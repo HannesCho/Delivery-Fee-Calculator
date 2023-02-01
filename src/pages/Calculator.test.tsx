@@ -299,4 +299,4 @@ test("Total fee should not over 15 euro.", () => {
 // <-
 
 // submit form test
-// limit cannot test the props to the next page.
+// limit cannot test the props to the next page. -> puppeteer e2e test.
