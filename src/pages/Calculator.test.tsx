@@ -11,7 +11,7 @@ import extraBulkFee from "../utils/calc/extraBulkFee";
 import fridayRush from "../utils/calc/fridayRush";
 import feeCalculator from "../utils/calc/feeCalculator";
 
-// -> for Font Awesome element
+// -> for Font Awesome element.
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 
@@ -300,4 +300,4 @@ test("Total fee should not over 15 euro.", () => {
 
 // submit form test
 // limit!! cannot test the props to the next page. -> puppeteer e2e test.
-// Check out e2e.test.tsx
+// e2e.test.tsx

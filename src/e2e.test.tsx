@@ -1,3 +1,4 @@
+// puppeteer for End to End test.
 import puppeteer from "puppeteer";
 
 test("Link to Check out should be worked.", async () => {
