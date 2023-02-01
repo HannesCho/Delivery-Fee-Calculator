@@ -5,15 +5,11 @@ Here You can find the list of the tests for thie project.
 
 ## Unit Test
 
-<br>
-
 ### Components/button/
 
 <br>
 
 #### DecrementBtn.test.tsx
-
-<br>
 
 | Test Name                                  |  Result   |
 | ------------------------------------------ | :-------: |
@@ -25,8 +21,6 @@ Here You can find the list of the tests for thie project.
 <br>
 
 #### IncrementBtn.test.tsx
-
-<br>
 
 | Test Name                                                |  Result   |
 | -------------------------------------------------------- | :-------: |
@@ -46,19 +40,15 @@ Here You can find the list of the tests for thie project.
 
 #### DateInput.test.tsx
 
-<br>
-
-| Test Name                                                                |  Result   |
-| ------------------------------------------------------------------------ | :-------: |
-| DateInput should be rendered.                                            | ✅ Passed |
-| DateInput contains attribute accoding to properties which are ✅ Passed. | ✅ Passed |
-| onChnge handler should be called when value is changed.                  | ✅ Passed |
+| Test Name                                                             |  Result   |
+| --------------------------------------------------------------------- | :-------: |
+| DateInput should be rendered.                                         | ✅ Passed |
+| DateInput contains attribute accoding to properties which are Passed. | ✅ Passed |
+| onChnge handler should be called when value is changed.               | ✅ Passed |
 
 <br>
 
 #### InputLabel.test.tsx
-
-<br>
 
 | Test Name                                    |  Result   |
 | -------------------------------------------- | :-------: |
@@ -68,8 +58,6 @@ Here You can find the list of the tests for thie project.
 <br>
 
 #### NumberInput.test.tsx
-
-<br>
 
 | Test Name                                                               |  Result   |
 | ----------------------------------------------------------------------- | :-------: |
@@ -82,8 +70,6 @@ Here You can find the list of the tests for thie project.
 <br>
 
 #### TimeInput.test.tsx
-
-<br>
 
 | Test Name                                                             |  Result   |
 | --------------------------------------------------------------------- | :-------: |
@@ -146,7 +132,6 @@ Here You can find the list of the tests for thie project.
 #### Calculator.test.tsx
 
 **All components render test.**
-<br>
 
 | Test Name                                                |  Result   |
 | -------------------------------------------------------- | :-------: |
@@ -288,9 +273,9 @@ Here You can find the list of the tests for thie project.
 
 <br>
 
-> ### utils/converter
->
-> <br>
+### utils/converter
+
+<br>
 
 #### dateToString.test.tsx
 
@@ -330,10 +315,11 @@ Here You can find the list of the tests for thie project.
 
 #### handleBlur.test.tsx
 
-| Test Name | Result |
-| | :: |
-| handleBlur shold be able to call setShowErrorText once when error is true. | ✅ Passed |
+| Test Name                                                                                  |  Result   |
+| ------------------------------------------------------------------------------------------ | :-------: |
+| handleBlur shold be able to call setShowErrorText once when error is true.                 | ✅ Passed |
 | handleBlur shold be able to call setShowErrorText and setError once when input is numbers. | ✅ Passed |
+
 <br>
 
 #### handleChange.test.tsx
