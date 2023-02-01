@@ -1,5 +1,5 @@
 import { extraBulkRate, extraBulkStandard } from "../../data/constants";
-import { FeeDTO } from "../../types/FeeDTO";
+import { FeeDTO } from "../../types/FeeDTO.type";
 
 // calculate Extra bulk fee, if the number of item is more than 12.
 const extraBulkFee = (amountOfItem: number): FeeDTO => {

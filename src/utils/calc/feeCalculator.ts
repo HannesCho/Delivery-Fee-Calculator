@@ -1,5 +1,5 @@
 // calculate total delivery fee
-import { FeeDTO, TotalFeeDTO } from "../../types/FeeDTO";
+import { FeeDTO, TotalFeeDTO } from "../../types/FeeDTO.type";
 import additionalDistanceFee from "./additionalDistanceFee";
 import additionalItems from "./additionalItems";
 import basicDistanceFee from "./basicDistanceFee";
@@ -15,16 +15,24 @@ const feeCalculator = ({
 }: TotalFeeDTO): FeeDTO => {
   let result = 0;
 
+  // if Cart Value over 100 euro, fee will be 0 euro.
+  if (Number(cartValue) >= 100) {
+    result = 0;
+    return { value: Number(result.toFixed(2)) };
+  }
+
   // calculate the delivery fee
-  const basicSurchargeValue = basicSurcharge(Number(cartValue)).value;
+  const basicSurchargeValue = basicSurcharge(
+    parseFloat(Number(cartValue).toFixed(2))
+  ).value;
   const additionalDistanceFeeValue = additionalDistanceFee(
-    Number(deliveryDistance)
+    parseInt(deliveryDistance)
   ).value;
   const basicDistanceFeeValue = basicDistanceFee(
-    Number(deliveryDistance)
+    parseInt(deliveryDistance)
   ).value;
-  const additionalItemsValue = additionalItems(Number(amountOfItem)).value;
-  const extraBulkFeeValue = extraBulkFee(Number(amountOfItem)).value;
+  const additionalItemsValue = additionalItems(parseInt(amountOfItem)).value;
+  const extraBulkFeeValue = extraBulkFee(parseInt(amountOfItem)).value;
   result =
     basicSurchargeValue +
     additionalDistanceFeeValue +
@@ -35,11 +43,6 @@ const feeCalculator = ({
   // apply friday rush
   const fridayRushValue = fridayRush({ dateAndTime }).value;
   result = Math.round(result * fridayRushValue * 100) / 100; //round at 2 decimal
-
-  // if Cart Value over 100 euro, fee will be 0 euro.
-  if (Number(cartValue) >= 100) {
-    result = 0;
-  }
 
   //Delivery fee is not more than 15 euro.
   if (result > 15) {

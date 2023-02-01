@@ -1,5 +1,9 @@
 import basicDistanceFee from "./basicDistanceFee";
 
+test("basicDistanceFee should be defined.", () => {
+  expect(basicDistanceFee(500)).toBeDefined();
+});
+
 test("basic distance fee is 0 euro, if there is no distance.", () => {
   expect(basicDistanceFee(0)).toStrictEqual({ value: 0 });
 });

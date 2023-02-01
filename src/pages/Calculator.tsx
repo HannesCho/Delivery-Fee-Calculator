@@ -7,8 +7,8 @@ import DateInput from "../components/input/DateInput";
 import TimeInput from "../components/input/TimeInput";
 import IncrementBtn from "../components/button/IncrementBtn";
 import DecrementBtn from "../components/button/DecrementBtn";
-import ShowErrorText from "../components/error/ShowErrorText";
-import { FeeDTO } from "../types/FeeDTO";
+import ShowErrorText from "../components/messages/ShowErrorText";
+import ShowText from "../components/messages/ShowText";
 import basicSurcharge from "../utils/calc/basicSurcharge";
 import basicDistanceFee from "../utils/calc/basicDistanceFee";
 import additionalDistanceFee from "../utils/calc/additionalDistanceFee";
@@ -23,6 +23,7 @@ import handleBlur from "../utils/handler/handleBlur";
 import timeToString from "../utils/converter/timeToString";
 import dateToString from "../utils/converter/dateToString";
 import { fridayRushRate } from "../data/constants";
+import { FeeDTO } from "../types/FeeDTO.type";
 
 const Calculator = () => {
   const [cartValue, setCartValue] = useState("");
@@ -31,7 +32,6 @@ const Calculator = () => {
   const [dateString, setDateString] = useState(dateToString(new Date()));
   const [timeString, setTimeString] = useState(timeToString(new Date()));
   const [totalFee, setTotalFee] = useState(0);
-  const navigate = useNavigate();
 
   const [error1, setError1] = useState(false);
   const [showErrorText1, setShowErrorText1] = useState(false);
@@ -40,6 +40,8 @@ const Calculator = () => {
   const [error3, setError3] = useState(false);
   const [showErrorText3, setShowErrorText3] = useState(false);
   const ref = useRef<HTMLInputElement>(null);
+
+  const navigate = useNavigate();
 
   // variable for the user seleceted date and time
   const dateAndTime = dateString + " " + timeString + " UTC";
@@ -91,6 +93,7 @@ const Calculator = () => {
               <NumberInput
                 name="Cart Value"
                 value={cartValue}
+                float={true}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   handleChange({
                     event: e,
@@ -111,7 +114,7 @@ const Calculator = () => {
                   })
                 }
               />
-              {ShowErrorText({ showErrorText: showErrorText1 })}
+              {ShowErrorText({ showErrorText: showErrorText1, float: true })}
             </div>
             <div className="btns">
               <IncrementBtn value={cartValue} setState={setCartValue} />
@@ -158,10 +161,10 @@ const Calculator = () => {
             </div>
           </div>
           <div className="rows">
-            <InputLabel name="Amount of Item" />
+            <InputLabel name="Number of Items" />
             <div className="flex flex-col">
               <NumberInput
-                name="Amount of Item"
+                name="Number of Items"
                 value={amountOfItem}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   handleChange({
@@ -255,11 +258,13 @@ const Calculator = () => {
             <div className="partial-fee-text">Friday Rush</div>
             <div className="partial-fee-value" data-testid="fridayRushRate">
               {fridayRush({ dateAndTime }).value === 1
-                ? "€ Not applied"
-                : `€ *${fridayRushRate} Applied`}
+                ? "Not applied"
+                : `*${fridayRushRate} Applied`}
             </div>
           </div>
-          <div className="h-6 m-4 border-b"></div>
+          <div className="m-4 border-b">
+            <ShowText cartValue={cartValue} totalFee={totalFee} />
+          </div>
           <div className="rows-partial">
             <div className="col-span-2 text-4xl text-white text-center">
               Total

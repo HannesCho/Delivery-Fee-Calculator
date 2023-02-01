@@ -15,20 +15,17 @@ const handleChange = ({
       setError(false);
     }
   }
-
-  // prevent number input goes below min.
-  if (min) {
-    if (Number(value) < Number(min)) {
+  // prevent number input goes below min or over max.
+  switch (true) {
+    case min && value < min:
       setState(min);
-    }
-  }
-  // prevent number input goes over max.
-  if (max) {
-    if (Number(value) > Number(max)) {
+      break;
+    case max && value > max:
       setState(max);
-    }
+      break;
+    default:
+      setState(value);
   }
-  setState(value);
 };
 
 export default handleChange;

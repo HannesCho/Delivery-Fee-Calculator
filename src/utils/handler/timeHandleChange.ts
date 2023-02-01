@@ -5,11 +5,17 @@ import timeToString from "../converter/timeToString";
 const timeHandleChange = ({ event, setState }: TimeHandleChangeProps) => {
   let { value, min, max } = event.target;
   let time = value;
-  // prevent selecting of non-service hour.
-  if (time < min || time > max) {
-    setState(timeToString(new Date()));
+  // prevent time input goes below min or over max.
+  switch (true) {
+    case min && time < min:
+      setState(min);
+      break;
+    case max && time > max:
+      setState(max);
+      break;
+    default:
+      setState(time);
   }
-  setState(time);
 };
 
 export default timeHandleChange;

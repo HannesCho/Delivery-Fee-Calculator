@@ -1,9 +1,6 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
-import { BrowserRouter, Router, RouterProps } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import Calculator from "./Calculator";
-// -> for Font Awesome element
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
 import dateToString from "../utils/converter/dateToString";
 import timeToString from "../utils/converter/timeToString";
 import basicSurcharge from "../utils/calc/basicSurcharge";
@@ -13,6 +10,10 @@ import additionalItems from "../utils/calc/additionalItems";
 import extraBulkFee from "../utils/calc/extraBulkFee";
 import fridayRush from "../utils/calc/fridayRush";
 import feeCalculator from "../utils/calc/feeCalculator";
+
+// -> for Font Awesome element
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
 
 library.add(fas);
 // <-
@@ -24,16 +25,17 @@ it("Calculator should be rendered.", () => {
   expect(calEl).toBeInTheDocument();
 });
 
-//Cart Value Delivery Distance Amount of Item Date Time
+//Cart Value Delivery Distance Number of Items Date Time
 it("All NumberInputs should be rendered.", () => {
-  const listEl = ["Cart Value", "Delivery Distance", "Amount of Item"];
+  const listEl = ["Cart Value", "Delivery Distance", "Number of Items"];
   render(<Calculator />, { wrapper: BrowserRouter });
   for (const el of listEl) {
     // test labels are rendered.
-    const labelEl = screen.getByLabelText(el);
+    const regex = new RegExp(el);
+    const labelEl = screen.getByLabelText(regex);
     expect(labelEl).toBeInTheDocument();
     // test inputs are rendered.
-    const inputEl = screen.getByRole("textbox", { name: el });
+    const inputEl = screen.getByRole("textbox", { name: regex });
     expect(inputEl).toBeInTheDocument();
   }
 });
@@ -44,7 +46,7 @@ it("DateInput and TimeInput should be rendered.", () => {
 
   render(<Calculator />, { wrapper: BrowserRouter });
   // Date label is rendered.
-  const labelEl = screen.getByLabelText("Date");
+  const labelEl = screen.getByLabelText(/Date/);
   expect(labelEl).toBeInTheDocument();
   // Date input is rendered.
   const dateEl = screen.getByDisplayValue(dateValue);
@@ -87,19 +89,29 @@ it("Check out form and btn should be rendered.", () => {
   expect(checkBtnEl).toBeInTheDocument();
 });
 
-it("Patial and Toatal fee values should be rendered 7 times.", () => {
+it("Patial and Toatal fee values fields should be rendered.", () => {
   render(<Calculator />, { wrapper: BrowserRouter });
-  const valueEl = screen.getAllByText(/€/);
-  expect(valueEl.length).toEqual(7);
+  const valueEl = screen.getAllByText(/€ /);
+  // this values include € text.
+  expect(valueEl.length).toEqual(6);
+  const fridayRushEl = screen.getByText(/applied/);
+  expect(fridayRushEl).toBeInTheDocument();
+});
+
+test("Check out Btn should be rendered.", () => {
+  render(<Calculator />, { wrapper: BrowserRouter });
+  const btnEl = screen.getByText("Check Out →");
+  expect(btnEl).toBeInTheDocument();
 });
 // <-
 
-// -> input value onChange test
+// -> input value onChange test.
 test("Input value should be chagned when user input different value.", () => {
-  const listEl = ["Cart Value", "Delivery Distance", "Amount of Item"];
+  const listEl = ["Cart Value", "Delivery Distance", "Number of Items"];
   render(<Calculator />, { wrapper: BrowserRouter });
   for (const el of listEl) {
-    const inputEl = screen.getByRole("textbox", { name: el });
+    const regex = new RegExp(el);
+    const inputEl = screen.getByRole("textbox", { name: regex });
     fireEvent.input(inputEl, { target: { value: "2" } });
     expect((inputEl as HTMLInputElement).value).toBe("2");
   }
@@ -112,8 +124,8 @@ test("Date and Time should be chagned when user input different value.", () => {
   render(<Calculator />, { wrapper: BrowserRouter });
   // Date should be changed.
   const dateEl = screen.getByDisplayValue(dateValue);
-  fireEvent.input(dateEl, { target: { value: "2023-01-31" } });
-  expect((dateEl as HTMLInputElement).value).toBe("2023-01-31");
+  fireEvent.input(dateEl, { target: { value: "2023-03-31" } });
+  expect((dateEl as HTMLInputElement).value).toBe("2023-03-31");
   // Time should be changed.
   const timeEl = screen.getByDisplayValue(timeValue);
   fireEvent.input(timeEl, { target: { value: "16:30" } });
@@ -123,10 +135,11 @@ test("Date and Time should be chagned when user input different value.", () => {
 
 // -> input value validation test
 test("Error message should be displayed when a user enters text to number inputs.", async () => {
-  const listEl = ["Cart Value", "Delivery Distance", "Amount of Item"];
+  const listEl = ["Cart Value", "Delivery Distance", "Number of Items"];
   render(<Calculator />, { wrapper: BrowserRouter });
   for (const el of listEl) {
-    const inputEl = screen.getByRole("textbox", { name: el });
+    const regex = new RegExp(el);
+    const inputEl = screen.getByRole("textbox", { name: regex });
     fireEvent.input(inputEl, { target: { value: "some text" } });
     fireEvent.blur(inputEl);
   }
@@ -135,10 +148,11 @@ test("Error message should be displayed when a user enters text to number inputs
 });
 
 test("Error message should be removed after the correction.", async () => {
-  const listEl = ["Cart Value", "Delivery Distance", "Amount of Item"];
+  const listEl = ["Cart Value", "Delivery Distance", "Number of Items"];
   render(<Calculator />, { wrapper: BrowserRouter });
   for (const el of listEl) {
-    const inputEl = screen.getByRole("textbox", { name: el });
+    const regex = new RegExp(el);
+    const inputEl = screen.getByRole("textbox", { name: regex });
     fireEvent.input(inputEl, { target: { value: "some text" } });
     fireEvent.blur(inputEl);
     const errorMsg = await screen.findByText(/please/i);
@@ -173,13 +187,13 @@ test("All the partial fees should be displayed, if it is applied.", () => {
       testName: "additionalDistanceFee",
     },
     {
-      name: "Amount of Item",
+      name: "Number of Items",
       value: "6",
       calc: additionalItems,
       testName: "additionalItems",
     },
     {
-      name: "Amount of Item",
+      name: "Number of Items",
       value: "12",
       calc: extraBulkFee,
       testName: "extraBulkFee",
@@ -187,7 +201,8 @@ test("All the partial fees should be displayed, if it is applied.", () => {
   ];
   render(<Calculator />, { wrapper: BrowserRouter });
   for (const el of listObjEl) {
-    const inputEl = screen.getByRole("textbox", { name: el.name });
+    const regex = new RegExp(el.name);
+    const inputEl = screen.getByRole("textbox", { name: regex });
     fireEvent.input(inputEl, { target: { value: el.value } });
     const testVal = el.calc(Number(el.value)).value;
     // get the element by data-testid
@@ -211,7 +226,7 @@ test("Friday Rush rate should be displayed, if it is applied.", () => {
   fireEvent.input(timeEl, { target: { value: "16:30" } });
   // get the element by data-testid
   const fridayRushId = screen.getByTestId("fridayRushRate");
-  const notFridayRushEL = within(fridayRushId).getByText("€ Not applied");
+  const notFridayRushEL = within(fridayRushId).getByText("Not applied");
   expect(notFridayRushEL).toBeInTheDocument();
   // applied date and time
   fireEvent.input(dateEl, { target: { value: "2023-03-03" } });
@@ -220,22 +235,23 @@ test("Friday Rush rate should be displayed, if it is applied.", () => {
     dateAndTime: "2023-03-03 16:30 UTC",
   }).value;
   const fridayRushEL = within(fridayRushId).getByText(
-    `€ *${fridayRushVal} Applied`
+    `*${fridayRushVal} Applied`
   );
   expect(fridayRushEL).toBeInTheDocument();
 });
 // <-
+
 // -> total fee test.
 test("Total fee should be displayed correctly.", () => {
   const dateValue = dateToString(new Date());
   const timeValue = timeToString(new Date());
 
   render(<Calculator />, { wrapper: BrowserRouter });
-  const cartInputEl = screen.getByRole("textbox", { name: "Cart Value" });
+  const cartInputEl = screen.getByRole("textbox", { name: /Cart Value/ });
   fireEvent.input(cartInputEl, { target: { value: "8" } });
-  const disInputEl = screen.getByRole("textbox", { name: "Delivery Distance" });
+  const disInputEl = screen.getByRole("textbox", { name: /Delivery Distance/ });
   fireEvent.input(disInputEl, { target: { value: "1500" } });
-  const amoutInputEl = screen.getByRole("textbox", { name: "Amount of Item" });
+  const amoutInputEl = screen.getByRole("textbox", { name: /Number of Items/ });
   fireEvent.input(amoutInputEl, { target: { value: "13" } });
   const dateEl = screen.getByDisplayValue(dateValue);
   const timeEl = screen.getByDisplayValue(timeValue);
@@ -257,7 +273,7 @@ test("Total fee should be 0, if the Cart Value is over 100 euro.", () => {
   const timeValue = timeToString(new Date());
 
   render(<Calculator />, { wrapper: BrowserRouter });
-  const cartInputEl = screen.getByRole("textbox", { name: "Cart Value" });
+  const cartInputEl = screen.getByRole("textbox", { name: /Cart Value/ });
   fireEvent.input(cartInputEl, { target: { value: "110" } });
   const dateEl = screen.getByDisplayValue(dateValue);
   const timeEl = screen.getByDisplayValue(timeValue);
@@ -270,11 +286,11 @@ test("Total fee should be 0, if the Cart Value is over 100 euro.", () => {
 
 test("Total fee should not over 15 euro.", () => {
   render(<Calculator />, { wrapper: BrowserRouter });
-  const cartInputEl = screen.getByRole("textbox", { name: "Cart Value" });
+  const cartInputEl = screen.getByRole("textbox", { name: /Cart Value/ });
   fireEvent.input(cartInputEl, { target: { value: "1" } });
-  const disInputEl = screen.getByRole("textbox", { name: "Delivery Distance" });
+  const disInputEl = screen.getByRole("textbox", { name: /Delivery Distance/ });
   fireEvent.input(disInputEl, { target: { value: "99999" } });
-  const amoutInputEl = screen.getByRole("textbox", { name: "Amount of Item" });
+  const amoutInputEl = screen.getByRole("textbox", { name: /Number of Items/ });
   fireEvent.input(amoutInputEl, { target: { value: "99999" } });
   const totalId = screen.getByTestId("totalFee");
   const totalEl = within(totalId).getByText(`€ 15`);
@@ -283,4 +299,4 @@ test("Total fee should not over 15 euro.", () => {
 // <-
 
 // submit form test
-test("Btn should be linked to Cheked Out page.", () => {});
+// limit cannot test the props to the next page.

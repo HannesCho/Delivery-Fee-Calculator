@@ -12,3 +12,15 @@ test("ShowErrorText should not be rendered when showErrorText is false.", () => 
   const textEl = screen.queryByText(/number/); // can be null, don't use getBy
   expect(textEl).toBeNull();
 });
+
+test("ShowErrorText for float number should be rendered when showErrorText is true and float is true.", () => {
+  render(<ShowErrorText showErrorText={true} float={true} />);
+  const textEl = screen.getByText(/Float/);
+  expect(textEl).toBeInTheDocument();
+});
+
+test("ShowErrorText for integer number should be rendered when showErrorText is true and float is flase.", () => {
+  render(<ShowErrorText showErrorText={true} />);
+  const textEl = screen.getByText(/Integer/);
+  expect(textEl).toBeInTheDocument();
+});

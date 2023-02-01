@@ -9,6 +9,7 @@ export interface InputProps {
   error: boolean;
   innerRef: React.RefObject<HTMLInputElement>;
   onBlur: React.FocusEventHandler<HTMLElement>;
+  float?: boolean;
 }
 
 export interface DateInputProps

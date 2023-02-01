@@ -16,7 +16,7 @@ test("handleBlur shold be able to call setShowErrorText once when error is true.
   expect(mockSetShowErrorText).toHaveBeenCalledTimes(1);
 });
 
-test("handleBlur shold be able to call setShowErrorText and setError once when input is numbers", () => {
+test("handleBlur shold be able to call setShowErrorText and setError once when input is numbers.", () => {
   const mockSetError = jest.fn();
   const mockSetShowErrorText = jest.fn();
   const mockEvent = {

@@ -1,4 +1,4 @@
-import { BtnProps } from "../../types/BtnProps";
+import { BtnProps } from "../../types/BtnProps.type";
 
 const IncrementBtn = ({ value, setState, max }: BtnProps) => {
   const increment = () => {
@@ -6,21 +6,20 @@ const IncrementBtn = ({ value, setState, max }: BtnProps) => {
     const numMax = Number(max);
 
     //set a limit if it is needed.
-    if (max) {
-      if (numValue >= numMax) {
-        setState(max);
-      }
+
+    if (max && numValue >= numMax) {
+      setState(max);
+    }
+
+    // handle initial value.
+    if (value === "") {
+      setState("0");
     } else {
-      // handle initial value.
-      if (value === "") {
-        setState("0");
+      // handle NaN.
+      if (numValue || numValue === 0) {
+        setState((numValue + 1).toString());
       } else {
-        // handle NaN.
-        if (numValue || numValue === 0) {
-          setState((numValue + 1).toString());
-        } else {
-          setState("0");
-        }
+        setState("0");
       }
     }
   };

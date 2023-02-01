@@ -1,5 +1,9 @@
 import basicSurcharge from "./basicSurcharge";
 
+test("basicSurcharge should be defined.", () => {
+  expect(basicSurcharge(8)).toBeDefined();
+});
+
 test("basic surcharge is difference between Cart Value and 10 euro.", () => {
   expect(basicSurcharge(8)).toStrictEqual({ value: 2 });
 });

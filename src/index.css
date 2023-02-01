@@ -86,4 +86,10 @@ input:-webkit-autofill:active {
   .rows-partial {
     @apply flex justify-between items-center h-[66px];
   }
+  .error-text {
+    @apply text-sm text-rose-600;
+  }
+  .show-text {
+    @apply text-sm text-yellow-600 flex flex-col items-end mb-4;
+  }
 }

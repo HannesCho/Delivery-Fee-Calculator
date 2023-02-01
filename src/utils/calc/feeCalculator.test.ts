@@ -1,13 +1,24 @@
 import feeCalculator from "./feeCalculator";
 
-test("Delivery Fee is not more than 15 euro", () => {
+test("feeCalculator should be defined.", () => {
+  expect(
+    feeCalculator({
+      cartValue: "10",
+      deliveryDistance: "10000",
+      amountOfItem: "30",
+      dateAndTime: "2023-01-26 16:00 UTC",
+    })
+  ).toBeDefined();
+});
+
+test("Delivery Fee is not more than 15 euro.", () => {
   expect(0).toStrictEqual(0);
   expect(
     feeCalculator({
       cartValue: "10",
       deliveryDistance: "10000",
       amountOfItem: "30",
-      dateAndTime: "2023-01-26 16:00",
+      dateAndTime: "2023-01-26 16:00 UTC",
     })
   ).toStrictEqual({ value: 15 });
 });
@@ -18,19 +29,19 @@ test("if Cart Value is more than 100 Delivery Fee is 0 euro.", () => {
       cartValue: "100",
       deliveryDistance: "10000",
       amountOfItem: "30",
-      dateAndTime: "2023-01-26 16:00",
+      dateAndTime: "2023-01-26 16:00 UTC",
     })
   ).toStrictEqual({ value: 0 });
 });
 
-test("Only Surcharge", () => {
+test("Only Surcharge.", () => {
   // Surcharge is apply, the rest are 0.
   expect(
     feeCalculator({
       cartValue: "5",
       deliveryDistance: "0",
       amountOfItem: "0",
-      dateAndTime: "2023-01-26 16:00",
+      dateAndTime: "2023-01-26 16:00 UTC",
     })
   ).toStrictEqual({ value: 5 });
 });
@@ -42,7 +53,7 @@ test("Only Basic Distance Fee.", () => {
       cartValue: "0",
       deliveryDistance: "1000",
       amountOfItem: "0",
-      dateAndTime: "2023-01-26 16:00",
+      dateAndTime: "2023-01-26 16:00 UTC",
     })
   ).toStrictEqual({ value: 2 });
 });
@@ -54,7 +65,7 @@ test("Additional Distance Fee.", () => {
       cartValue: "0",
       deliveryDistance: "1500",
       amountOfItem: "0",
-      dateAndTime: "2023-01-26 16:00",
+      dateAndTime: "2023-01-26 16:00 UTC",
     })
   ).toStrictEqual({ value: 3 });
 });
@@ -66,7 +77,7 @@ test("Only additional items Fee.", () => {
       cartValue: "0",
       deliveryDistance: "0",
       amountOfItem: "6",
-      dateAndTime: "2023-01-26 16:00",
+      dateAndTime: "2023-01-26 16:00 UTC",
     })
   ).toStrictEqual({ value: 1 });
 });
@@ -78,19 +89,19 @@ test("Extra Bulk items Fee.", () => {
       cartValue: "0",
       deliveryDistance: "0",
       amountOfItem: "12",
-      dateAndTime: "2023-01-26 16:00",
+      dateAndTime: "2023-01-26 16:00 UTC",
     })
   ).toStrictEqual({ value: 5.2 });
 });
 
-test("if date is friday and time is between 3 and 7 PM, friday rush will apply.", () => {
+test("if date is friday and time is between 3 and 7 PM(UTC), friday rush will apply.", () => {
   // 3(original fee) * 1.2(friday rush rate) euro
   expect(
     feeCalculator({
       cartValue: "9",
       deliveryDistance: "1000",
       amountOfItem: "6",
-      dateAndTime: "2023-01-27 16:00",
+      dateAndTime: "2023-01-27 16:00 UTC",
     })
   ).toStrictEqual({ value: 4.8 });
 });

@@ -1,4 +1,4 @@
-import { BtnProps } from "../../types/BtnProps";
+import { BtnProps } from "../../types/BtnProps.type";
 
 const DecrementBtn = ({ value, setState }: BtnProps) => {
   const decrement = () => {

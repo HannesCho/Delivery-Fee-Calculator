@@ -10,10 +10,44 @@ test("IncrementBtn should be rendered.", () => {
   expect(btnEl).toBeInTheDocument();
 });
 
-test("setState should be called when btn is clicked.", () => {
+test("If the value is 0, called setState to 1.", () => {
   render(<IncrementBtn value="0" setState={mockUseState} />);
   const btnEl = screen.getByRole("button");
-  expect(btnEl).toBeInTheDocument();
   fireEvent.click(btnEl);
-  expect(mockUseState).toBeCalledTimes(1);
+  expect(mockUseState).toBeCalledWith("1");
+});
+
+test("If the value is bigger than max, setState to max.", () => {
+  render(<IncrementBtn value="100" setState={mockUseState} max="90" />);
+  const btnEl = screen.getByRole("button");
+  fireEvent.click(btnEl);
+  expect(mockUseState).toBeCalledWith("90");
+});
+
+test("If the value is smaller than max, setState to value + 1.", () => {
+  render(<IncrementBtn value="100" setState={mockUseState} max="120" />);
+  const btnEl = screen.getByRole("button");
+  fireEvent.click(btnEl);
+  expect(mockUseState).toBeCalledWith("101");
+});
+
+test("If the value is empty, called setState to 0.", () => {
+  render(<IncrementBtn value="" setState={mockUseState} />);
+  const btnEl = screen.getByRole("button");
+  fireEvent.click(btnEl);
+  expect(mockUseState).toBeCalledWith("0");
+});
+
+test("If the value is 10, called setState to 11.", () => {
+  render(<IncrementBtn value="10" setState={mockUseState} />);
+  const btnEl = screen.getByRole("button");
+  fireEvent.click(btnEl);
+  expect(mockUseState).toBeCalledWith("11");
+});
+
+test("If the value is NaN, called setState to 0.", () => {
+  render(<IncrementBtn value="NaN" setState={mockUseState} />);
+  const btnEl = screen.getByRole("button");
+  fireEvent.click(btnEl);
+  expect(mockUseState).toBeCalledWith("0");
 });

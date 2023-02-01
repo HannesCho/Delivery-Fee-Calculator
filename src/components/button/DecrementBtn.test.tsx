@@ -10,10 +10,26 @@ test("DecrementBtn should be rendered.", () => {
   expect(btnEl).toBeInTheDocument();
 });
 
-test("setState should be called when btn is clicked.", () => {
+test("If the value is 0, called setState to 0.", () => {
   render(<DecrementBtn value="0" setState={mockUseState} />);
   const btnEl = screen.getByRole("button");
   expect(btnEl).toBeInTheDocument();
   fireEvent.click(btnEl);
-  expect(mockUseState).toBeCalledTimes(1);
+  expect(mockUseState).toBeCalledWith("0");
+});
+
+test("If the value is 10, called setState to 9.", () => {
+  render(<DecrementBtn value="10" setState={mockUseState} />);
+  const btnEl = screen.getByRole("button");
+  expect(btnEl).toBeInTheDocument();
+  fireEvent.click(btnEl);
+  expect(mockUseState).toBeCalledWith("9");
+});
+
+test("If the value is NaN, called setState to 0.", () => {
+  render(<DecrementBtn value="NaN" setState={mockUseState} />);
+  const btnEl = screen.getByRole("button");
+  expect(btnEl).toBeInTheDocument();
+  fireEvent.click(btnEl);
+  expect(mockUseState).toBeCalledWith("0");
 });
