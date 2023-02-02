@@ -5,9 +5,11 @@ import { DateDTO, FeeDTO } from "../../types/FeeDTO.type";
 const fridayRush = ({ dateAndTime }: DateDTO): FeeDTO => {
   const dateAndTimeUTC = new Date(dateAndTime);
   if (
-    dateAndTimeUTC.getUTCDay() === 5 &&
-    dateAndTimeUTC.getUTCHours() >= 15 &&
-    dateAndTimeUTC.getUTCHours() <= 19
+    (dateAndTimeUTC.getUTCDay() === 5 &&
+      dateAndTimeUTC.getUTCHours() >= 15 &&
+      dateAndTimeUTC.getUTCHours() <= 18) ||
+    (dateAndTimeUTC.getUTCHours() === 19 &&
+      dateAndTimeUTC.getUTCMinutes() === 0)
   ) {
     // return basic surchage
     return { value: fridayRushRate };

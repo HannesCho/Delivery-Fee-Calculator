@@ -7,7 +7,10 @@ const handleChange = ({
   error,
   setError,
 }: HandleChangeProps) => {
-  let { value, min, max } = event.target;
+  const { value, min, max } = event.target;
+  const numValue = Number(value);
+  const numMin = Number(min);
+  const numMax = Number(max);
   // validation of input
   const newValueIsValid = !event.target.validity.patternMismatch;
   if (error) {
@@ -16,11 +19,11 @@ const handleChange = ({
     }
   }
   // prevent number input goes below min or over max.
-  switch (value) {
-    case min && value < min:
+  switch (true) {
+    case numMin && numValue < numMin:
       setState(min);
       break;
-    case max && value > max:
+    case numMax && numValue > numMax:
       setState(max);
       break;
     default:
