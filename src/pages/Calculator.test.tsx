@@ -15,7 +15,6 @@ import * as router from "react-router";
 // -> for Font Awesome element.
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
-import userEvent from "@testing-library/user-event";
 
 library.add(fas);
 // <-

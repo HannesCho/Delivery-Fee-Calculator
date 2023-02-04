@@ -1,6 +1,13 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import DecrementBtn from "./DecrementBtn";
 
+// -> for Font Awesome element.
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+
+library.add(fas);
+// <-
+
 // mock function for setState
 const mockUseState = jest.fn();
 const mockSetError = jest.fn();

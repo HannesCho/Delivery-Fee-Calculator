@@ -5,12 +5,12 @@ Here You can find the list of the tests for thie project.
 
 ## Unit Test
 
-- 107 tests in total.
+- 110 tests in total.
 - Covers <br>
-  90.15% Statements<br>
-  94.33% Branches<br>
-  90.69% Functions<br>
-  90.15% Lines<br>
+  90.82% Statements<br>
+  94.73% Branches<br>
+  90.90% Functions<br>
+  90.82% Lines<br>
 - Additional [e2e Test](#end-to-end-test) for uncovered Lines.
 
 ### Components/button/
@@ -19,12 +19,13 @@ Here You can find the list of the tests for thie project.
 
 #### DecrementBtn.test.tsx
 
-| Test Name                                  |  Result   |
-| ------------------------------------------ | :-------: |
-| DecrementBtn should be rendered.           | ✅ Passed |
-| If the value is 0, called setState to 0.   | ✅ Passed |
-| If the value is 10, called setState to 9.  | ✅ Passed |
-| If the value is NaN, called setState to 0. | ✅ Passed |
+| Test Name                                            |  Result   |
+| ---------------------------------------------------- | :-------: |
+| DecrementBtn should be rendered.                     | ✅ Passed |
+| If the value is 0, called setState to 0.             | ✅ Passed |
+| If the value is 10, called setState to 9.            | ✅ Passed |
+| If the value is NaN, called setState to 0.           | ✅ Passed |
+| Should reset the error msg, when the btn is clicked. | ✅ Passed |
 
 <br>
 
@@ -39,6 +40,7 @@ Here You can find the list of the tests for thie project.
 | If the value is empty, called setState to 0.             | ✅ Passed |
 | If the value is 10, called setState to 11.               | ✅ Passed |
 | If the value is NaN, called setState to 0.               | ✅ Passed |
+| Should reset the error msg, when the btn is clicked.     | ✅ Passed |
 
 <br>
 
@@ -179,6 +181,15 @@ Here You can find the list of the tests for thie project.
 | Total fee should be displayed correctly.                   | ✅ Passed |
 | Total fee should be 0, if the Cart Value is over 100 euro. | ✅ Passed |
 | Total fee should not over 15 euro.                         | ✅ Passed |
+
+<br>
+
+**Fill out the form test.**
+
+| Test Name                                                                    |  Result   |
+| ---------------------------------------------------------------------------- | :-------: |
+| Check Out btn should be invalid when the values are not completed.           | ✅ Passed |
+| Fill out form message should be displayed when the values are not completed. | ✅ Passed |
 
 <br>
 
@@ -354,7 +365,7 @@ Here You can find the list of the tests for thie project.
 
 ## End to End Test
 
-- 2 tests in total.
+- 1 tests in total.
 - Ues puppeteer for test.
   <br>
 
@@ -362,5 +373,4 @@ Here You can find the list of the tests for thie project.
 
 | Test Name                                    |  Result   |
 | -------------------------------------------- | :-------: |
-| Link to Check out should be worked.          | ✅ Passed |
 | Total Fee shold be passed to Check out page. | ✅ Passed |
