@@ -49,6 +49,15 @@ Here is the screenshot of the test report of this project.
 
 For the list of the Test you can see [TestList.md](./TestList.md).
 
+
+**if you get error with puppeteer please reinstall npm package version @18.1.0**
+
+```
+$ npm i puppeteer@18.1.0
+```
+
+Also this app should run on http://localhost:3000 to do the end to end test.
+
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
