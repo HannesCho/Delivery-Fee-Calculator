@@ -4,7 +4,7 @@ const TimeInput = ({ name, value, onChange, min, max }: DateInputProps) => {
   return (
     <input
       id={name}
-      className="input-field"
+      className="time-input-field"
       type="time"
       name={name}
       value={value}

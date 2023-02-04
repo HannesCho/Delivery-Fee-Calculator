@@ -7,11 +7,11 @@ const Navbar = () => {
       <div className="flex justify-end w-auto w-full p-4">
         <Link to="/" className="flex">
           <FontAwesomeIcon icon={["fas", "house"]} className="nav-icon" />
-          <div className="custom-font nav-text">Home</div>
+          <div className="custom-sm-font nav-text">Home</div>
         </Link>
         <Link to="/calculator" className="flex">
           <FontAwesomeIcon icon={["fas", "calculator"]} className="nav-icon" />
-          <div className="custom-font nav-text">Calculator</div>
+          <div className="custom-sm-font nav-text">Calculator</div>
         </Link>
       </div>
     </nav>

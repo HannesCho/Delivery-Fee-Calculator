@@ -6,18 +6,12 @@ const ShowErrorText = ({ showErrorText, float }: ErrorTextProps) => {
       {float
         ? showErrorText && (
             <p className="error-text" role="alert">
-              Please make sure <br></br>
-              you've entered a <strong>Float number</strong>
-              <br></br>
-              allow upto the 2 decimal points
+              Invalid input (only allowed number upto the 2 decimal points)
             </p>
           )
         : showErrorText && (
             <p className="error-text" role="alert">
-              Please make sure <br></br>
-              you've entered a <strong>Integer number</strong>
-              <br></br>
-              no decimal point
+              Invalid input (only allowed number without decimal points)
             </p>
           )}
     </>

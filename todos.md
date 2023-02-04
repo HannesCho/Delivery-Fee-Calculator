@@ -1,0 +1,3 @@
+- central arrange.
+- cannot check out when there are no or worng values.
+- remove arrow

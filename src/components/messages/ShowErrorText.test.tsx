@@ -15,12 +15,12 @@ test("ShowErrorText should not be rendered when showErrorText is false.", () => 
 
 test("ShowErrorText for float number should be rendered when showErrorText is true and float is true.", () => {
   render(<ShowErrorText showErrorText={true} float={true} />);
-  const textEl = screen.getByText(/Float/);
+  const textEl = screen.getByText(/2 decimal points/);
   expect(textEl).toBeInTheDocument();
 });
 
 test("ShowErrorText for integer number should be rendered when showErrorText is true and float is flase.", () => {
   render(<ShowErrorText showErrorText={true} />);
-  const textEl = screen.getByText(/Integer/);
+  const textEl = screen.getByText(/without decimal points/);
   expect(textEl).toBeInTheDocument();
 });

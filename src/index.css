@@ -4,9 +4,15 @@
 
 /* apply local font, do not need to connect to internet to use the font */
 @font-face {
-  font-family: "Fredoka One";
-  src: local("Fredoka One"),
-    url(./font/FredokaOne/FredokaOne-Regular.ttf) format("truetype");
+  font-family: "Montserrat Bold";
+  src: local("Montserrat Bold"),
+    url(./font/Montserrat//static/Montserrat-ExtraBold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: local("Montserrat"),
+    url(./font/Montserrat/static/Montserrat-Medium.ttf) format("truetype");
 }
 
 /* remove the arrow inside number input fields. */
@@ -25,8 +31,12 @@ input:-webkit-autofill:active {
 }
 
 /* apply downloaded font */
-.custom-font {
-  font-family: "Fredoka One", cursive;
+.custom-lg-font {
+  font-family: "Montserrat", cursive;
+}
+
+.custom-sm-font {
+  font-family: "Montserrat", cursive;
 }
 
 /* apply the calculated height to fix the nav and footer */
@@ -51,45 +61,63 @@ input:-webkit-autofill:active {
 /* reuse the sytle from tailwind CSS. */
 @layer components {
   .partial-fee-text {
-    @apply text-sm lg:text-base text-gray-400 text-start ml-2 lg:ml-8;
+    @apply text-sm md:text-base text-gray-700 text-start ml-2 md:ml-8;
   }
   .partial-fee-value {
-    @apply text-sm lg:text-base text-gray-400 text-end ml-2 lg:ml-8;
+    @apply text-sm md:text-base text-gray-700 text-end ml-2 md:ml-8;
   }
   .lg-text {
-    @apply text-white text-2xl sm:text-5xl;
+    @apply text-black text-xl sm:text-3xl;
   }
   .round-bg {
     @apply mx-auto w-[300px] h-[300px] sm:w-[550px] sm:h-[550px] rounded-full bg-black flex flex-col justify-center items-center;
   }
-  .yellow-btn {
-    @apply w-full bg-yellow-400 hover:bg-yellow-300 mt-4 mb-2 text-black p-3 rounded-lg font-semibold text-sm sm:text-lg;
+  .cyan-btn {
+    @apply w-full bg-cyan-400 hover:bg-cyan-300 mt-4 mb-2 text-black p-3 rounded-lg text-sm sm:text-lg;
+  }
+  .cyan-btn-dis {
+    @apply w-full bg-cyan-300 mt-4 mb-2 text-gray-500 p-3 rounded-lg text-sm sm:text-lg;
   }
   .nav-icon {
-    @apply text-yellow-400 w-4 h-4 sm:w-6 h-6 mr-2;
+    @apply text-cyan-400 w-4 h-4 sm:w-6 h-6 mr-2;
   }
   .nav-text {
-    @apply text-black font-bold text-sm sm:text-lg mr-2;
+    @apply text-black font-bold text-sm sm:text-lg mr-6;
   }
   .footer-text {
     @apply text-gray-500 text-sm sm:text-lg mr-4;
   }
   .input-field {
-    @apply w-[160px] m-2 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-yellow-400 focus:shadow-md;
+    @apply w-[250px] md:w-[380px] m-2 mt-0 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-cyan-400 focus:shadow-md;
+  }
+  .input-lable {
+    @apply text-sm m-2 sm:text-lg font-medium text-[#07074D] mr-4 w-[200px];
   }
   .rows {
-    @apply flex items-center justify-start ml-2 sm:ml-14;
+    @apply flex items-start justify-end ml-2;
+  }
+  .rows-start {
+    @apply flex items-center justify-start;
   }
   .btns {
-    @apply w-[20px] flex flex-col font-black text-xl ml-2;
+    @apply flex justify-center h-12 font-black text-xl border border-[#e0e0e0] bg-white rounded-md ml-2;
   }
   .rows-partial {
-    @apply flex justify-between items-center h-[66px];
+    @apply flex justify-between items-center h-[50px];
   }
   .error-text {
-    @apply text-sm text-rose-600;
+    @apply text-xs text-rose-600;
   }
   .show-text {
-    @apply text-sm text-yellow-600 flex flex-col items-end mb-4;
+    @apply text-sm text-cyan-600 flex flex-col items-end mb-4;
+  }
+  .btns-icon {
+    @apply text-black h-5 m-1;
+  }
+  .date-input-field {
+    @apply w-[190px] md:w-[250px] mr-2 md:m-2 mt-0 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-cyan-400 focus:shadow-md col-span-1;
+  }
+  .time-input-field {
+    @apply w-[130px] md:w-[176px] md:m-2 mt-0 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-cyan-400 focus:shadow-md col-span-1;
   }
 }

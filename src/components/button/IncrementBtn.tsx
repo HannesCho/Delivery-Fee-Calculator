@@ -1,12 +1,24 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BtnProps } from "../../types/BtnProps.type";
 
-const IncrementBtn = ({ value, setState, max }: BtnProps) => {
+const IncrementBtn = ({
+  value,
+  setState,
+  max,
+  error,
+  setError,
+  setShowErrorText,
+}: BtnProps) => {
   const increment = () => {
     const numValue = Number(value);
     const numMax = Number(max);
 
+    // reset the error message.
+    if (error) {
+      setError(false);
+      setShowErrorText(false);
+    }
     //set a limit if it is needed.
-
     if (max && numValue >= numMax) {
       setState(max);
     }
@@ -24,9 +36,15 @@ const IncrementBtn = ({ value, setState, max }: BtnProps) => {
     }
   };
   return (
-    <div className="w-6 h-6">
-      <button onClick={increment}>+</button>
-    </div>
+    <button onClick={increment}>
+      {
+        <FontAwesomeIcon
+          title="up-btn"
+          icon={["fas", "plus"]}
+          className="btns-icon"
+        />
+      }
+    </button>
   );
 };
 

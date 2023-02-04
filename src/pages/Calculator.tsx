@@ -32,6 +32,7 @@ const Calculator = () => {
   const [dateString, setDateString] = useState(dateToString(new Date()));
   const [timeString, setTimeString] = useState(timeToString(new Date()));
   const [totalFee, setTotalFee] = useState(0);
+  const [disabledBtn, setDisabledBtn] = useState(true);
 
   const [error1, setError1] = useState(false);
   const [showErrorText1, setShowErrorText1] = useState(false);
@@ -73,21 +74,41 @@ const Calculator = () => {
     }
   };
 
+  useEffect(() => {
+    if (
+      cartValue &&
+      cartValue !== "0" &&
+      deliveryDistance &&
+      deliveryDistance !== "0" &&
+      amountOfItem &&
+      amountOfItem !== "0" &&
+      !error1 &&
+      !error2 &&
+      !error3
+    ) {
+      setDisabledBtn(false);
+    } else {
+      setDisabledBtn(true);
+    }
+  }, [cartValue, deliveryDistance, amountOfItem, error1, error2, error3]);
+
   return (
-    <div className="custom-h-cal h-full flex items-center justify-center pb-14">
-      <div className="custom-font w-full grid grid-cols-1 grid-rows-2 md:grid-cols-3 md:grid-rows-1 h-full border-8 border-black rounded-3xl z-20">
-        <div className="p-6 mx-auto w-full col-span-2">
-          <div className="h-16 mb-4 flex items-center col-span-3 grid-no-1">
+    <div className="custom-h-cal h-full flex flex-col items-center justify-center pb-14">
+      <div className="custom-sm-font h-full flex flex-col md:flex-row">
+        <div className="p-6 w-[375px] md:w-[500px]">
+          <div className="h-16 mb-4 flex items-center">
             <FontAwesomeIcon
               icon={["fas", "calculator"]}
-              className="text-yellow-400 h-10 mr-4"
+              className="text-cyan-400 h-10 mr-4"
             />
-            <div className="text-2xl lg:text-5xl md:text-4xl sm:text-3xl">
+            <div className="custom-lg-font text-xl md:text-3xl">
               Delivery Fee Calculator
             </div>
           </div>
-          <div className="rows">
+          <div className="rows-start">
             <InputLabel name="Cart Value" />
+          </div>
+          <div className="rows">
             <div className="flex flex-col">
               <NumberInput
                 name="Cart Value"
@@ -113,15 +134,38 @@ const Calculator = () => {
                   })
                 }
               />
-              {ShowErrorText({ showErrorText: showErrorText1, float: true })}
+              <div className="h-6 pl-4">
+                {showErrorText1 ? (
+                  ShowErrorText({
+                    showErrorText: showErrorText1,
+                    float: true,
+                  })
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
             <div className="btns">
-              <IncrementBtn value={cartValue} setState={setCartValue} />
-              <DecrementBtn value={cartValue} setState={setCartValue} />
+              <IncrementBtn
+                value={cartValue}
+                setState={setCartValue}
+                error={error1}
+                setError={setError1}
+                setShowErrorText={setShowErrorText1}
+              />
+              <DecrementBtn
+                value={cartValue}
+                setState={setCartValue}
+                error={error1}
+                setError={setError1}
+                setShowErrorText={setShowErrorText1}
+              />
             </div>
           </div>
-          <div className="rows">
+          <div className="rows-start">
             <InputLabel name="Delivery Distance" />
+          </div>
+          <div className="rows">
             <div className="flex flex-col">
               <NumberInput
                 name="Delivery Distance"
@@ -146,21 +190,38 @@ const Calculator = () => {
                   })
                 }
               />
-              {ShowErrorText({ showErrorText: showErrorText2 })}
+              <div className="h-6 pl-4">
+                {showErrorText2 ? (
+                  ShowErrorText({
+                    showErrorText: showErrorText2,
+                    float: false,
+                  })
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
             <div className="btns">
               <IncrementBtn
                 value={deliveryDistance}
                 setState={setDeliveryDistance}
+                error={error2}
+                setError={setError2}
+                setShowErrorText={setShowErrorText2}
               />
               <DecrementBtn
                 value={deliveryDistance}
                 setState={setDeliveryDistance}
+                error={error2}
+                setError={setError2}
+                setShowErrorText={setShowErrorText2}
               />
             </div>
           </div>
-          <div className="rows">
+          <div className="rows-start">
             <InputLabel name="Number of Items" />
+          </div>
+          <div className="rows">
             <div className="flex flex-col">
               <NumberInput
                 name="Number of Items"
@@ -185,16 +246,39 @@ const Calculator = () => {
                   })
                 }
               />
-              {ShowErrorText({ showErrorText: showErrorText3 })}
+              <div className="h-6 pl-4">
+                {showErrorText3 ? (
+                  ShowErrorText({
+                    showErrorText: showErrorText3,
+                    float: false,
+                  })
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
             <div className="btns">
-              <IncrementBtn value={amountOfItem} setState={setAmountOfItem} />
-              <DecrementBtn value={amountOfItem} setState={setAmountOfItem} />
+              <IncrementBtn
+                value={amountOfItem}
+                setState={setAmountOfItem}
+                error={error3}
+                setError={setError3}
+                setShowErrorText={setShowErrorText3}
+              />
+              <DecrementBtn
+                value={amountOfItem}
+                setState={setAmountOfItem}
+                error={error3}
+                setError={setError3}
+                setShowErrorText={setShowErrorText3}
+              />
             </div>
           </div>
-          <div className="rows">
+          <div className="rows-start">
             <InputLabel name="Date" />
-            <div className="flex flex-col">
+          </div>
+          <div className="rows">
+            <div className="flex flex-row">
               <DateInput
                 name="Date"
                 value={dateString}
@@ -215,71 +299,90 @@ const Calculator = () => {
             </div>
           </div>
         </div>
-        <div className="p-6 h-full bg-gray-700 rounded-r-2xl z-0">
-          <div className="h-16 flex items-end text-white text-lg lg:text-2xl mb-4">
-            Fee Details
-          </div>
-          <div className="rows-partial">
-            <div className="partial-fee-text">Basic Surcharge</div>
-            <div className="partial-fee-value" data-testid="basicSurcharge">
-              € {basicSurcharge(Number(cartValue)).value}
+        <div className="pt-4 md:pt-32 w-[375px] md:w-[400px]">
+          <div className="p-6 h-fit bg-white border border-4 border-black rounded-2xl">
+            <div className="custom-lg-font h-16 flex text-black text-lg md:text-2xl mb-2">
+              Fee Details
             </div>
-          </div>
-          <div className="rows-partial">
-            <div className="partial-fee-text">
-              <p>Basic Distance Fee</p>
-              <p>Additional Distance Fee</p>
-            </div>
-            <div className="partial-fee-value">
-              <div data-testid="basicDistanceFee">
-                € {basicDistanceFee(Number(deliveryDistance)).value}
-              </div>
-              <div data-testid="additionalDistanceFee">
-                € {additionalDistanceFee(Number(deliveryDistance)).value}
+            <div className="rows-partial">
+              <div className="partial-fee-text">Basic Surcharge</div>
+              <div className="partial-fee-value" data-testid="basicSurcharge">
+                € {basicSurcharge(Number(cartValue)).value}
               </div>
             </div>
-          </div>
-          <div className="rows-partial">
-            <div className="partial-fee-text">
-              <p>Additional Items</p>
-              <p>Extra Bulk Fee</p>
-            </div>
-            <div className="partial-fee-value">
-              <div data-testid="additionalItems">
-                € {additionalItems(Number(amountOfItem)).value}
+            <div className="rows-partial">
+              <div className="partial-fee-text">
+                <p>Basic Distance Fee</p>
+                <p>Additional Distance Fee</p>
               </div>
-              <div data-testid="extraBulkFee">
-                € {extraBulkFee(Number(amountOfItem)).value}
+              <div className="partial-fee-value">
+                <div data-testid="basicDistanceFee">
+                  € {basicDistanceFee(Number(deliveryDistance)).value}
+                </div>
+                <div data-testid="additionalDistanceFee">
+                  € {additionalDistanceFee(Number(deliveryDistance)).value}
+                </div>
               </div>
             </div>
-          </div>
-          <div className="rows-partial">
-            <div className="partial-fee-text">Friday Rush</div>
-            <div className="partial-fee-value" data-testid="fridayRushRate">
-              {fridayRush({ dateAndTime }).value === 1
-                ? "Not applied"
-                : `*${fridayRushRate} Applied`}
+            <div className="rows-partial">
+              <div className="partial-fee-text">
+                <p>Additional Items</p>
+                <p>Extra Bulk Fee</p>
+              </div>
+              <div className="partial-fee-value">
+                <div data-testid="additionalItems">
+                  € {additionalItems(Number(amountOfItem)).value}
+                </div>
+                <div data-testid="extraBulkFee">
+                  € {extraBulkFee(Number(amountOfItem)).value}
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="m-4 border-b">
-            <ShowText cartValue={cartValue} totalFee={totalFee} />
-          </div>
-          <div className="rows-partial">
-            <div className="col-span-2 text-4xl text-white text-center">
-              Total
+            <div className="rows-partial">
+              <div className="partial-fee-text">Friday Rush</div>
+              <div className="partial-fee-value" data-testid="fridayRushRate">
+                {fridayRush({ dateAndTime }).value === 1
+                  ? "Not applied"
+                  : `*${fridayRushRate} Applied`}
+              </div>
             </div>
-            <div
-              className="text-3xl text-white text-end mr-4"
-              data-testid="totalFee"
-            >
-              € {totalFee}
+            <div className="m-4 border-b">
+              <ShowText cartValue={cartValue} totalFee={totalFee} />
             </div>
-          </div>
-
-          <div className="col-span-3 flex justify-end items-end">
-            <form onSubmit={handleSubmit}>
-              <button className="yellow-btn">Check Out →</button>
-            </form>
+            <div className="rows-partial">
+              <div className="custom-lg-font col-span-2 text-2xl text-black text-center">
+                Total
+              </div>
+              <div
+                className="custom-lg-font text-2xl text-black text-end mr-4"
+                data-testid="totalFee"
+              >
+                € {totalFee}
+              </div>
+            </div>
+            <div className="col-span-3 flex justify-end items-end">
+              <form onSubmit={handleSubmit}>
+                {disabledBtn ? (
+                  <button className="cyan-btn-dis" disabled={disabledBtn}>
+                    Check Out
+                  </button>
+                ) : (
+                  <>
+                    <button className="cyan-btn" disabled={disabledBtn}>
+                      Check Out
+                    </button>
+                    <div className="h-6"></div>
+                  </>
+                )}
+              </form>
+            </div>
+            {disabledBtn ? (
+              <p className="text-rose-700 text-end">
+                * Please fill out the form.
+              </p>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

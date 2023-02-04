@@ -1,8 +1,20 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BtnProps } from "../../types/BtnProps.type";
 
-const DecrementBtn = ({ value, setState }: BtnProps) => {
+const DecrementBtn = ({
+  value,
+  setState,
+  error,
+  setError,
+  setShowErrorText,
+}: BtnProps) => {
   const decrement = () => {
     const numValue = Number(value);
+    // reset the error message.
+    if (error) {
+      setError(false);
+      setShowErrorText(false);
+    }
 
     // if value is 0 no more decrease
     if (numValue === 0) {
@@ -17,9 +29,15 @@ const DecrementBtn = ({ value, setState }: BtnProps) => {
     }
   };
   return (
-    <div className="w-6 h-6">
-      <button onClick={decrement}>-</button>
-    </div>
+    <button onClick={decrement}>
+      {
+        <FontAwesomeIcon
+          title="down-btn"
+          icon={["fas", "minus"]}
+          className="btns-icon"
+        />
+      }
+    </button>
   );
 };
 

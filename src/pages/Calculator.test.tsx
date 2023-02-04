@@ -10,10 +10,12 @@ import additionalItems from "../utils/calc/additionalItems";
 import extraBulkFee from "../utils/calc/extraBulkFee";
 import fridayRush from "../utils/calc/fridayRush";
 import feeCalculator from "../utils/calc/feeCalculator";
+import * as router from "react-router";
 
 // -> for Font Awesome element.
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
+import userEvent from "@testing-library/user-event";
 
 library.add(fas);
 // <-
@@ -77,15 +79,15 @@ it("Texts should be rendered.", () => {
 
 it("increment and decrement btns should be rendered 3 times.", () => {
   render(<Calculator />, { wrapper: BrowserRouter });
-  const increBtnEl = screen.getAllByRole("button", { name: "+" });
+  const increBtnEl = screen.getAllByTitle("up-btn");
   expect(increBtnEl.length).toEqual(3);
-  const decreBtnEl = screen.getAllByRole("button", { name: "-" });
+  const decreBtnEl = screen.getAllByTitle("down-btn");
   expect(decreBtnEl.length).toEqual(3);
 });
 
 it("Check out form and btn should be rendered.", () => {
   render(<Calculator />, { wrapper: BrowserRouter });
-  const checkBtnEl = screen.getByRole("button", { name: "Check Out →" });
+  const checkBtnEl = screen.getByRole("button", { name: "Check Out" });
   expect(checkBtnEl).toBeInTheDocument();
 });
 
@@ -100,7 +102,7 @@ it("Patial and Toatal fee values fields should be rendered.", () => {
 
 test("Check out Btn should be rendered.", () => {
   render(<Calculator />, { wrapper: BrowserRouter });
-  const btnEl = screen.getByText("Check Out →");
+  const btnEl = screen.getByText("Check Out");
   expect(btnEl).toBeInTheDocument();
 });
 // <-
@@ -143,7 +145,7 @@ test("Error message should be displayed when a user enters text to number inputs
     fireEvent.input(inputEl, { target: { value: "some text" } });
     fireEvent.blur(inputEl);
   }
-  const errorMsg = await screen.findAllByText(/please/i);
+  const errorMsg = await screen.findAllByText(/Invalid/i);
   expect(errorMsg.length).toEqual(3);
 });
 
@@ -155,11 +157,11 @@ test("Error message should be removed after the correction.", async () => {
     const inputEl = screen.getByRole("textbox", { name: regex });
     fireEvent.input(inputEl, { target: { value: "some text" } });
     fireEvent.blur(inputEl);
-    const errorMsg = await screen.findByText(/please/i);
+    const errorMsg = await screen.findByText(/invalid/i);
     expect(errorMsg).toBeInTheDocument();
     fireEvent.input(inputEl, { target: { value: "10" } });
     fireEvent.blur(inputEl);
-    const noErrorMsg = screen.queryByText(/please/i);
+    const noErrorMsg = screen.queryByText(/invalid/i);
     expect(noErrorMsg).not.toBeInTheDocument();
   }
 });
@@ -298,6 +300,31 @@ test("Total fee should not over 15 euro.", () => {
 });
 // <-
 
-// submit form test
+// fill out the form test.
+test("Check Out btn should be invalid when the values are not completed.", () => {
+  render(<Calculator />, { wrapper: BrowserRouter });
+  const cartInputEl = screen.getByRole("textbox", { name: /Cart Value/ });
+  fireEvent.input(cartInputEl, { target: { value: "0" } });
+  const disInputEl = screen.getByRole("textbox", { name: /Delivery Distance/ });
+  fireEvent.input(disInputEl, { target: { value: "some text" } });
+  const amoutInputEl = screen.getByRole("textbox", { name: /Number of Items/ });
+  fireEvent.input(amoutInputEl, { target: { value: "some text" } });
+  const checkBtnEl = screen.getByRole("button", { name: "Check Out" });
+  expect(checkBtnEl).toHaveAttribute("disabled");
+});
+
+test("Fill out form message should be displayed when the values are not completed.", () => {
+  render(<Calculator />, { wrapper: BrowserRouter });
+  const cartInputEl = screen.getByRole("textbox", { name: /Cart Value/ });
+  fireEvent.input(cartInputEl, { target: { value: "0" } });
+  const disInputEl = screen.getByRole("textbox", { name: /Delivery Distance/ });
+  fireEvent.input(disInputEl, { target: { value: "some text" } });
+  const amoutInputEl = screen.getByRole("textbox", { name: /Number of Items/ });
+  fireEvent.input(amoutInputEl, { target: { value: "some text" } });
+  const checkTextEl = screen.getByText(/please/i);
+  expect(checkTextEl).toBeInTheDocument();
+});
+
+// submit form test.
 // limit!! cannot test the props to the next page. -> puppeteer e2e test.
 // e2e.test.tsx
