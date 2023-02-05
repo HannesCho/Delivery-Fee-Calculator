@@ -64,7 +64,7 @@ input:-webkit-autofill:active {
     @apply text-sm md:text-base text-gray-700 text-start ml-2 md:ml-8;
   }
   .partial-fee-value {
-    @apply text-sm md:text-base text-gray-700 text-end ml-2 md:ml-8;
+    @apply text-sm md:text-base text-gray-700 text-end ml-2 md:ml-8 truncate max-w-[85px];
   }
   .lg-text {
     @apply text-black text-xl sm:text-3xl;
@@ -103,7 +103,7 @@ input:-webkit-autofill:active {
     @apply flex justify-center h-12 font-black text-xl border border-[#e0e0e0] bg-white rounded-md ml-2;
   }
   .rows-partial {
-    @apply flex justify-between items-center h-[45px];
+    @apply flex justify-between items-center h-[45px] mb-2;
   }
   .error-text {
     @apply text-xs text-rose-600;

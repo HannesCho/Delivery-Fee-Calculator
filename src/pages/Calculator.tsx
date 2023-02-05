@@ -340,7 +340,7 @@ const Calculator = () => {
             </div>
             <div className="rows-partial">
               <div className="partial-fee-text">Friday Rush</div>
-              <div className="partial-fee-value" data-testid="fridayRushRate">
+              <div className="partial-fee-text" data-testid="fridayRushRate">
                 {fridayRush({ dateAndTime }).value === 1
                   ? "Not applied"
                   : `*${fridayRushRate} Applied`}
