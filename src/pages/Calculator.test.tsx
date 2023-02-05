@@ -20,14 +20,14 @@ library.add(fas);
 // <-
 
 // -> All components render test.
-it("Calculator should be rendered.", () => {
+test("Calculator should be rendered.", () => {
   render(<Calculator />, { wrapper: BrowserRouter });
   const calEl = screen.getByText("Delivery Fee Calculator");
   expect(calEl).toBeInTheDocument();
 });
 
 //Cart Value Delivery Distance Number of Items Date Time
-it("All NumberInputs should be rendered.", () => {
+test("All NumberInputs should be rendered.", () => {
   const listEl = ["Cart Value", "Delivery Distance", "Number of Items"];
   render(<Calculator />, { wrapper: BrowserRouter });
   for (const el of listEl) {
@@ -41,7 +41,7 @@ it("All NumberInputs should be rendered.", () => {
   }
 });
 
-it("DateInput and TimeInput should be rendered.", () => {
+test("DateInput and TimeInput should be rendered.", () => {
   const dateValue = dateToString(new Date());
   const timeValue = timeToString(new Date());
 
@@ -57,7 +57,7 @@ it("DateInput and TimeInput should be rendered.", () => {
   expect(timeEl).toBeInTheDocument();
 });
 
-it("Texts should be rendered.", () => {
+test("Texts should be rendered.", () => {
   const textList = [
     "Delivery Fee Calculator",
     "Fee Details",
@@ -76,7 +76,7 @@ it("Texts should be rendered.", () => {
   }
 });
 
-it("increment and decrement btns should be rendered 3 times.", () => {
+test("increment and decrement btns should be rendered 3 times.", () => {
   render(<Calculator />, { wrapper: BrowserRouter });
   const increBtnEl = screen.getAllByTitle("up-btn");
   expect(increBtnEl.length).toEqual(3);
@@ -84,13 +84,13 @@ it("increment and decrement btns should be rendered 3 times.", () => {
   expect(decreBtnEl.length).toEqual(3);
 });
 
-it("Check out form and btn should be rendered.", () => {
+test("Check out form and btn should be rendered.", () => {
   render(<Calculator />, { wrapper: BrowserRouter });
   const checkBtnEl = screen.getByRole("button", { name: "Check Out" });
   expect(checkBtnEl).toBeInTheDocument();
 });
 
-it("Patial and Toatal fee values fields should be rendered.", () => {
+test("Patial and Toatal fee values fields should be rendered.", () => {
   render(<Calculator />, { wrapper: BrowserRouter });
   const valueEl = screen.getAllByText(/€ /);
   // this values include € text.

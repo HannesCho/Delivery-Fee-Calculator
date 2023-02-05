@@ -5,7 +5,7 @@ Here You can find the list of the tests for thie project.
 
 ## Unit Test
 
-- 110 tests in total.
+- 111 tests in total.
 - Covers <br>
   90.82% Statements<br>
   94.73% Branches<br>
@@ -352,14 +352,13 @@ Here You can find the list of the tests for thie project.
 
 <br>
 
-#### handletimeHandleChangeChange.test.tsx
+#### timeHandleChangeChange.test.tsx
 
-| Test Name                                                                                   |  Result   |
-| ------------------------------------------------------------------------------------------- | :-------: |
-| handleChange shold be able to call setState with value when value is in range.              | ✅ Passed |
-| handleChange shold be able to call setState with max when value bigger than range.          | ✅ Passed |
-| handleChange shold be able to call setState with min when value smaller than range.         | ✅ Passed |
-| handleChange shold be able to call serError once when error is true and pattern is matched. | ✅ Passed |
+| Test Name                                                                           |  Result   |
+| ----------------------------------------------------------------------------------- | :-------: |
+| handleChange shold be able to call setState with value when value is in range.      | ✅ Passed |
+| handleChange shold be able to call setState with max when value bigger than range.  | ✅ Passed |
+| handleChange shold be able to call setState with min when value smaller than range. | ✅ Passed |
 
 <br>
 

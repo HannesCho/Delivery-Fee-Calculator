@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CheckedOut from "./CheckedOut";
 
-it("Checkedout page should be rendered.", () => {
+test("Checkedout page should be rendered.", () => {
   render(
     <BrowserRouter>
       <Routes>
