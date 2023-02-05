@@ -3,7 +3,7 @@ import Footer from "./Footer";
 
 test("Footer should be rendered.", () => {
   render(<Footer />);
-  const nameEl = screen.getByText(/Hannes/);
+  const nameEl = screen.getByText(/Hoonsung/);
   expect(nameEl).toBeInTheDocument();
 });
 
