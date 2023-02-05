@@ -45,7 +45,8 @@ It show the result in terminal.
 And it will auto generate the coverage folder and you can see the test report if you open `coverage/lcov-report/index.html` file.
 
 Here is the screenshot of the test report of this project.
-<img width="1440" alt="test report" src="https://user-images.githubusercontent.com/63042736/216102478-5dd43dbc-f5f1-4851-b852-4cf602ad89f4.png">
+<img width="1440" alt="Screenshot 2023-02-05 at 15 14 44" src="https://user-images.githubusercontent.com/63042736/216824685-295ce956-b925-4211-b668-e3d51c0a1ada.png">
+
 
 For the list of the Test you can see [TestList.md](./TestList.md).
 
