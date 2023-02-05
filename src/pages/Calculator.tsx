@@ -363,9 +363,11 @@ const Calculator = () => {
             <div className="col-span-3 flex justify-end items-end">
               <form onSubmit={handleSubmit}>
                 {disabledBtn ? (
-                  <button className="cyan-btn-dis" disabled={disabledBtn}>
-                    Check Out
-                  </button>
+                  <>
+                    <button className="cyan-btn-dis" disabled={disabledBtn}>
+                      Check Out
+                    </button>
+                  </>
                 ) : (
                   <>
                     <button className="cyan-btn" disabled={disabledBtn}>
