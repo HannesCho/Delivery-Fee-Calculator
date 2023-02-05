@@ -299,9 +299,9 @@ const Calculator = () => {
             </div>
           </div>
         </div>
-        <div className="pt-4 md:pt-32 w-[375px] md:w-[400px]">
-          <div className="p-6 h-fit bg-white border border-4 border-black rounded-2xl">
-            <div className="custom-lg-font h-16 flex text-black text-lg md:text-2xl mb-2">
+        <div className="pt-4 md:pt-28 w-[375px] md:w-[400px]">
+          <div className="p-6 h-fit max-h-full bg-white border border-4 border-black rounded-2xl">
+            <div className="custom-lg-font flex text-black text-base md:text-xl">
               Fee Details
             </div>
             <div className="rows-partial">
