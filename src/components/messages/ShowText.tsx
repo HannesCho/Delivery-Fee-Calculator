@@ -4,7 +4,7 @@ const ShowText = ({ cartValue, totalFee }: MessageProps) => {
   return (
     <>
       {cartValue ? (
-        Number(cartValue) > 100 && (
+        Number(cartValue) >= 100 && (
           <p className="show-text" role="alert">
             <span>Your Cart Value is over € 100</span>
             <span>Delivery Fee is free.</span>

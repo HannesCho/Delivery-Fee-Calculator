@@ -73,13 +73,13 @@ input:-webkit-autofill:active {
     @apply mx-auto w-[300px] h-[300px] sm:w-[550px] sm:h-[550px] rounded-full bg-black flex flex-col justify-center items-center;
   }
   .cyan-btn {
-    @apply w-full bg-cyan-400 hover:bg-cyan-300 mt-4 mb-2 text-black p-3 rounded-lg text-sm sm:text-lg;
+    @apply w-full bg-[#3F90D7] hover:bg-[#30A4E2] mt-4 mb-2 text-black p-3 rounded-lg text-sm sm:text-lg;
   }
   .cyan-btn-dis {
-    @apply w-full bg-cyan-300 mt-4 mb-2 text-gray-500 p-3 rounded-lg text-sm sm:text-lg;
+    @apply w-full bg-[#3F90D7] mt-4 mb-2 text-gray-500 p-3 rounded-lg text-sm sm:text-lg;
   }
   .nav-icon {
-    @apply text-cyan-400 w-4 h-4 sm:w-6 h-6 mr-2;
+    @apply text-[#3F90D7] w-4 h-4 sm:w-6 h-6 mr-2;
   }
   .nav-text {
     @apply text-black font-bold text-sm sm:text-lg mr-6;
@@ -88,7 +88,7 @@ input:-webkit-autofill:active {
     @apply text-gray-500 text-sm sm:text-lg mr-4;
   }
   .input-field {
-    @apply w-[250px] md:w-[380px] m-2 mt-0 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-cyan-400 focus:shadow-md;
+    @apply w-[250px] md:w-[380px] m-2 mt-0 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#3F90D7] focus:shadow-md;
   }
   .input-lable {
     @apply text-sm m-2 sm:text-lg font-medium text-[#07074D] mr-4 w-[200px];
@@ -109,15 +109,15 @@ input:-webkit-autofill:active {
     @apply text-xs text-rose-600;
   }
   .show-text {
-    @apply text-sm text-cyan-600 flex flex-col items-end mb-4;
+    @apply text-sm text-[#3F90D7] flex flex-col items-end mb-4;
   }
   .btns-icon {
     @apply text-black h-5 m-1;
   }
   .date-input-field {
-    @apply w-[190px] md:w-[250px] mr-2 md:m-2 mt-0 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-cyan-400 focus:shadow-md col-span-1;
+    @apply w-[190px] md:w-[250px] mr-2 md:m-2 mt-0 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#3F90D7] focus:shadow-md col-span-1;
   }
   .time-input-field {
-    @apply w-[130px] md:w-[176px] md:m-2 mt-0 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-cyan-400 focus:shadow-md col-span-1;
+    @apply w-[130px] md:w-[176px] md:m-2 mt-0 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#3F90D7] focus:shadow-md col-span-1;
   }
 }

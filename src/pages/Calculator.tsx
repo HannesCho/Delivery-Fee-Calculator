@@ -99,7 +99,7 @@ const Calculator = () => {
           <div className="h-16 mb-4 flex items-center">
             <FontAwesomeIcon
               icon={["fas", "calculator"]}
-              className="text-cyan-400 h-10 mr-4"
+              className="text-[#3F90D7] h-10 mr-4"
             />
             <div className="custom-lg-font text-xl md:text-3xl">
               Delivery Fee Calculator
