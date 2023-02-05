@@ -366,7 +366,7 @@ Here You can find the list of the tests for thie project.
 ## End to End Test
 
 - 1 tests in total.
-- Ues puppeteer for test.
+- Use puppeteer for test.
   <br>
 
 ### /e2e.test.tsx
