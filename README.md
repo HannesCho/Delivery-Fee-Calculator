@@ -16,7 +16,7 @@ In the project directory, you should run <code>npm i</code> to install all the d
 $ npm i
 ```
 
-You might encounter with some warning of **high severity vulnerabilities**
+You might encounter with some warning of **high severity vulnerabilities**.\
 My app still work perfectly even though there are warnings.
 
 Create React App was created by Dan Abramov.
