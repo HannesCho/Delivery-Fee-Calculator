@@ -1,4 +1,4 @@
-# Delivery Fee Calculator for 2023 Wolt Summer Internship.
+# Delivery Fee Calculator
 
 This project was created with [Create React App](https://github.com/facebook/create-react-app).
 
